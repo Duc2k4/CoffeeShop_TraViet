@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liên Hệ – Trà Việt</title>
+  <meta name="description" content="Liên hệ với Trà Việt – Gọi điện, nhắn Zalo, Messenger hoặc đến trực tiếp. Chúng tôi luôn sẵn sàng phục vụ bạn." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .quick-contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; margin-bottom:2.5rem; }
+    .quick-btn {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:0.5rem; padding:1.75rem 1rem;
+      border-radius:var(--radius-lg);
+      text-decoration:none;
+      font-weight:600; font-size:0.88rem;
+      transition:all var(--transition-base);
+      border:2px solid transparent;
+      text-align:center;
+    }
+    .quick-btn .q-icon { font-size:2rem; }
+    .quick-btn.call { background:#e8f5e9; color:#2e7d32; border-color:#c8e6c9; }
+    .quick-btn.zalo { background:#e3f2fd; color:#1565c0; border-color:#bbdefb; }
+    .quick-btn.messenger { background:#f3e5f5; color:#6a1b9a; border-color:#e1bee7; }
+    .quick-btn.maps { background:#fff3e0; color:#e65100; border-color:#ffe0b2; }
+    .quick-btn:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+
+    .contact-form-card {
+      background:var(--color-white);
+      border-radius:var(--radius-xl);
+      padding:2.5rem;
+      border:1px solid var(--color-border);
+      box-shadow:var(--shadow-sm);
+    }
+    .contact-form-card h3 {
+      font-family:var(--font-heading);
+      font-size:1.6rem; margin-bottom:0.4rem;
+    }
+    .contact-form-card > p { color:var(--color-text-muted); margin-bottom:2rem; font-size:0.92rem; }
+    .form-group-light label { color:var(--color-text-muted); font-size:0.82rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; display:block; margin-bottom:0.4rem; }
+    .form-group-light input, .form-group-light textarea, .form-group-light select {
+      width:100%; padding:0.85rem 1.1rem;
+      border:1.5px solid var(--color-border);
+      border-radius:var(--radius-md);
+      font-size:0.92rem; outline:none;
+      transition:border-color var(--transition-base);
+      background:var(--color-white);
+      color:var(--color-text);
+      margin-bottom:1rem;
+    }
+    .form-group-light input:focus, .form-group-light textarea:focus { border-color:var(--color-green); }
+    .form-group-light textarea { min-height:120px; resize:vertical; }
+    .faq-list { margin-top:var(--space-xl); }
+    .faq-item { border-bottom:1px solid var(--color-border); }
+    .faq-question {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 0; cursor:pointer;
+      font-weight:600; font-size:0.95rem;
+      transition:color var(--transition-base);
+    }
+    .faq-question:hover { color:var(--color-green); }
+    .faq-toggle { font-size:1.2rem; color:var(--color-green); transition:transform var(--transition-base); }
+    .faq-item.open .faq-toggle { transform:rotate(45deg); }
+    .faq-answer { font-size:0.88rem; color:var(--color-text-muted); line-height:1.8; max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.4s ease; }
+    .faq-item.open .faq-answer { max-height:200px; padding-bottom:1.25rem; }
+
+    @media(max-width:900px) {
+      .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .quick-contact-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:480px) {
+      .quick-contact-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar" role="navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z"/></svg></div>
+        <span class="logo-text" style="color:var(--color-green-dark);">Trà Việt</span>
+      </a>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">Về chúng tôi</a></li>
+        <li><a href="store.html">Cửa hàng</a></li>
+        <li><a href="promotions.html">Khuyến mãi</a></li>
+        <li><a href="contact.html" style="color:var(--color-green);font-weight:700;">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+      <div class="navbar-cta"><a href="menu.html" class="btn btn-sm">Xem menu</a></div>
+      <button class="navbar-toggle" id="navbar-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container page-header-content">
+      <span class="section-label" style="color:var(--color-gold-light);">Liên hệ</span>
+      <h1>Chúng tôi luôn<br>ở đây cho bạn</h1>
+      <p>Mọi thắc mắc, đặt hàng hay hợp tác – đừng ngần ngại liên hệ với chúng tôi</p>
+    </div>
+  </div>
+
+  <section style="padding:var(--space-3xl) 0;background:var(--color-cream);">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Quick contact + info -->
+        <div data-animate="fade-left">
+          <span class="section-label">Liên hệ nhanh</span>
+          <h2 style="font-family:var(--font-heading);font-size:1.8rem;margin-bottom:1rem;">Chọn cách liên hệ<br>phù hợp với bạn</h2>
+
+          <div class="quick-contact-grid">
+            <a href="tel:0363226006" class="quick-btn call" id="contact-call-btn">
+              <span class="q-icon">📞</span>
+              <span>Gọi điện</span>
+              <small style="font-weight:400;color:inherit;opacity:0.7;">0363 226 006</small>
+            </a>
+            <a href="https://zalo.me/0363226006" target="_blank" class="quick-btn zalo" id="contact-zalo-btn">
+              <span class="q-icon">💬</span>
+              <span>Nhắn Zalo</span>
+              <small style="font-weight:400;color:inherit;opacity:0.7;">0363 226 006</small>
+            </a>
+            <a href="https://m.me/traviet" target="_blank" class="quick-btn messenger" id="contact-messenger-btn">
+              <span class="q-icon">📩</span>
+              <span>Messenger</span>
+              <small style="font-weight:400;color:inherit;opacity:0.7;">@TràViệt</small>
+            </a>
+            <a href="https://maps.google.com" target="_blank" class="quick-btn maps" id="contact-maps-btn">
+              <span class="q-icon">🗺️</span>
+              <span>Chỉ đường</span>
+              <small style="font-weight:400;color:inherit;opacity:0.7;">Google Maps</small>
+            </a>
+          </div>
+
+          <!-- Store info -->
+          <div style="background:var(--color-white);border-radius:var(--radius-lg);padding:2rem;border:1px solid var(--color-border);margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:1.25rem;">Thông tin cửa hàng</h3>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                <span style="color:var(--color-green);font-size:1.1rem;flex-shrink:0;">📍</span>
+                <span style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.6;">123 Đường Trà Xanh, Phường Bình Yên, Quận 3, TP. Hồ Chí Minh</span>
+              </div>
+              <div style="display:flex;gap:0.75rem;align-items:center;">
+                <span style="color:var(--color-green);font-size:1.1rem;">⏰</span>
+                <span style="font-size:0.9rem;color:var(--color-text-muted);">Thứ 2 – Thứ 6: 7:00 – 22:00 | Cuối tuần: 7:00 – 23:00</span>
+              </div>
+              <div style="display:flex;gap:0.75rem;align-items:center;">
+                <span style="color:var(--color-green);font-size:1.1rem;">✉️</span>
+                <a href="mailto:hello@traviet.vn" style="font-size:0.9rem;color:var(--color-green);">hello@traviet.vn</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order links -->
+          <div style="background:var(--color-green-dark);border-radius:var(--radius-lg);padding:1.75rem;">
+            <h4 style="font-family:var(--font-heading);font-size:1.1rem;color:white;margin-bottom:1rem;">Đặt món ngay</h4>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <a href="https://zalo.me/0363226006" target="_blank" style="display:flex;align-items:center;gap:0.75rem;color:rgba(255,255,255,0.85);font-size:0.88rem;transition:color 0.2s;" id="order-zalo-link">
+                <span style="background:rgba(255,255,255,0.1);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">💬</span>
+                Đặt qua Zalo – Trả lời trong vòng 5 phút
+              </a>
+              <a href="https://m.me/traviet" target="_blank" style="display:flex;align-items:center;gap:0.75rem;color:rgba(255,255,255,0.85);font-size:0.88rem;" id="order-messenger-link">
+                <span style="background:rgba(255,255,255,0.1);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">📩</span>
+                Đặt qua Messenger – Xác nhận trong 10 phút
+              </a>
+              <a href="tel:0363226006" style="display:flex;align-items:center;gap:0.75rem;color:rgba(255,255,255,0.85);font-size:0.88rem;" id="order-phone-link">
+                <span style="background:rgba(255,255,255,0.1);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">📞</span>
+                Gọi trực tiếp – Đặt hàng nhanh nhất
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div data-animate="fade-right">
+          <div class="contact-form-card">
+            <h3>Gửi tin nhắn cho chúng tôi</h3>
+            <p>Hợp tác, phản hồi, hay bất kỳ câu hỏi nào – chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+            <form id="contact-form" onsubmit="handleContactForm(event)">
+              <div class="form-group-light">
+                <label for="c-name">Họ và tên *</label>
+                <input type="text" id="c-name" placeholder="Nguyễn Văn A" required />
+              </div>
+              <div class="form-group-light">
+                <label for="c-phone">Số điện thoại *</label>
+                <input type="tel" id="c-phone" placeholder="0363 226 006" required />
+              </div>
+              <div class="form-group-light">
+                <label for="c-email">Email</label>
+                <input type="email" id="c-email" placeholder="email@example.com" />
+              </div>
+              <div class="form-group-light">
+                <label for="c-subject">Chủ đề</label>
+                <select id="c-subject">
+                  <option value="">Chọn chủ đề...</option>
+                  <option value="order">Đặt hàng / Tư vấn thực đơn</option>
+                  <option value="feedback">Phản hồi về sản phẩm</option>
+                  <option value="collab">Hợp tác kinh doanh</option>
+                  <option value="member">Đăng ký thành viên</option>
+                  <option value="other">Khác</option>
+                </select>
+              </div>
+              <div class="form-group-light">
+                <label for="c-message">Nội dung</label>
+                <textarea id="c-message" placeholder="Nhập nội dung bạn muốn gửi..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="contact-submit-btn">
+                <i class="fa-solid fa-paper-plane"></i> Gửi tin nhắn
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div style="margin-top:var(--space-3xl);">
+        <div class="text-center" style="margin-bottom:var(--space-xl);">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title">Câu hỏi thường gặp</h2>
+        </div>
+        <div class="faq-list" style="max-width:720px;margin:0 auto;" id="faq-list">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Tôi có thể đặt trước không gian ngồi không?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Có! Bạn có thể đặt chỗ trước qua Zalo hoặc điện thoại. Chúng tôi có thể giữ chỗ cho nhóm từ 5 người trở lên trong tối đa 30 phút.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Trà Việt có giao hàng tận nơi không?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Hiện tại chúng tôi hỗ trợ giao hàng trong bán kính 3km qua Grab hoặc ShopeeFood. Bạn cũng có thể đặt trước và đến lấy tại quán.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Quán có chỗ đậu xe không?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Có bãi đậu xe máy miễn phí ngay trước quán (15 chỗ). Bãi đậu xe ô tô cách quán 100m tại bãi giữ xe công cộng, có tính phí.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Mã giảm giá có thể dùng cho đơn giao hàng không?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Hầu hết mã giảm giá áp dụng được cho cả đơn tại quán và đơn giao hàng, trừ một số chương trình đặc biệt có ghi rõ "chỉ tại quán".</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Tôi muốn hợp tác kinh doanh / nhượng quyền thương hiệu?
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">Chúng tôi rất vui khi được hợp tác! Vui lòng gửi email đến hello@traviet.vn với tiêu đề "Hợp tác kinh doanh" và chúng tôi sẽ liên hệ trong vòng 3 ngày làm việc.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Trà Việt. Tất cả quyền được bảo lưu.</p>
+        <p class="footer-copy">📍 123 Đường Trà Xanh, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    function handleContactForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Gửi thành công!';
+        btn.style.background = 'linear-gradient(135deg,#4a7c59,#6ea87e)';
+        showToast('✅ Tin nhắn đã gửi! Chúng tôi sẽ liên hệ lại trong 24 giờ.');
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

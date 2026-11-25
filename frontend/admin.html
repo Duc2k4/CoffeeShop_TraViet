@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Quản Trị & Nhà Bếp KDS – Trà Việt</title>
+  <meta name="description" content="Trang ẩn quản lý thực đơn, nhận đơn hàng real-time cho nhà bếp và quản lý doanh thu Trà Việt." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ─── Admin Dashboard Styles ─── */
+    body { background: #16231a; color: #e5efe8; min-height: 100vh; }
+    
+    .admin-navbar {
+      background: rgba(22, 35, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(74,124,89,0.3);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--color-white);
+    }
+
+    .sse-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sse-status-pill.online { background: rgba(46,125,50,0.3); border-color: #4caf50; color: #81c784; }
+
+    .admin-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.3);
+      padding: 0.3rem;
+      border-radius: var(--radius-full);
+    }
+
+    .tab-btn {
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--color-green);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(74,124,89,0.4);
+    }
+
+    .admin-main { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+
+    /* Analytics Bar */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media(max-width:900px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width:500px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+    .metric-card {
+      background: rgba(32, 50, 38, 0.8);
+      border: 1px solid rgba(74,124,89,0.25);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .metric-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(74,124,89,0.2);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .metric-info h4 { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.05em; }
+    .metric-val { font-size: 1.6rem; font-weight: 700; color: #fff; font-family: var(--font-heading); margin-top: 0.1rem; }
+
+    /* Kitchen KDS Cards Grid */
+    .kds-filters {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .kds-filter-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+    }
+
+    .kds-filter-btn.active {
+      background: var(--color-green);
+      color: #fff;
+      border-color: var(--color-green);
+    }
+
+    .kds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .order-card {
+      background: rgba(30, 48, 36, 0.95);
+      border: 1.5px solid rgba(74,124,89,0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .order-card.new-pulse {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 25px rgba(200,169,110,0.5);
+      animation: kdsPulse 1.5s infinite alternate;
+    }
+
+    @keyframes kdsPulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px dashed rgba(255,255,255,0.15);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .order-id { font-size: 1.15rem; font-weight: 700; color: var(--color-gold); font-family: var(--font-heading); }
+    .order-time { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+    .status-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+
+    .status-badge.pending { background: #ff9800; color: #000; }
+    .status-badge.brewing { background: #2196f3; color: #fff; }
+    .status-badge.delivering { background: #9c27b0; color: #fff; }
+    .status-badge.completed { background: #4caf50; color: #fff; }
+    .status-badge.cancelled { background: #f44336; color: #fff; }
+
+    .order-customer {
+      font-size: 0.84rem;
+      background: rgba(0,0,0,0.25);
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .order-items-list {
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .kds-item-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.88rem;
+    }
+
+    .kds-item-opts {
+      font-size: 0.74rem;
+      color: var(--color-gold-light);
+      margin-top: 0.1rem;
+    }
+
+    .order-footer {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .kds-action-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .kds-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border-radius: var(--radius-md);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* Menu CRUD Table & Switch */
+    .admin-card {
+      background: rgba(30, 48, 36, 0.95);
+      border: 1px solid rgba(74,124,89,0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .menu-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      white-space: nowrap;
+    }
+
+    .admin-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    .menu-table th, .menu-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.88rem;
+    }
+
+    .menu-table th { background: rgba(0,0,0,0.3); color: var(--color-gold); font-weight: 700; }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #4caf50;
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider { background-color: #f44336; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    @media(max-width:1000px) {
+      .admin-navbar { flex-wrap: wrap; gap: 1rem; }
+      .admin-tabs { order: 1; }
+      .admin-main { padding: 1.25rem; }
+    }
+
+    @media(max-width:600px) {
+      .admin-navbar { padding: 1rem; }
+      .admin-logo { font-size: 1.05rem; }
+      .admin-tabs { width: 100%; overflow-x: auto; justify-content: flex-start; }
+      .tab-btn { white-space: nowrap; }
+      .admin-navbar > div:last-child { width: 100%; flex-wrap: wrap; gap: 0.6rem !important; }
+      .admin-navbar > div:last-child > * { flex: 1 1 auto; justify-content: center; }
+      .admin-main { padding: 0.75rem; }
+      .metric-card, .order-card, .admin-card { padding: 1rem; }
+      .admin-card > div:first-child { align-items: flex-start !important; flex-wrap: wrap; gap: 1rem; }
+      .admin-card > div:first-child .btn { width: 100%; justify-content: center; }
+      .kds-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+      .kds-filters { gap: 0.5rem; }
+      .kds-filter-btn { padding: 0.5rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Header Navbar -->
+  <header class="admin-navbar">
+    <div class="admin-logo">
+      <span style="font-size:1.6rem;">🍵</span>
+      <div>
+        <strong>TRÀ VIỆT ADMIN</strong>
+        <div style="font-size:0.7rem;color:var(--color-gold);font-family:var(--font-body);font-weight:400;">Màn Hình Nhà Bếp KDS Real-Time</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="tab-btn active" data-tab="tab-kds"><i class="fa-solid fa-fire"></i> Nhà Bếp (KDS)</button>
+      <button class="tab-btn" data-tab="tab-menu"><i class="fa-solid fa-utensils"></i> Quản Lý Menu</button>
+      <button class="tab-btn" data-tab="tab-webhook"><i class="fa-solid fa-qrcode"></i> Webhook VietQR</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <div class="sse-status-pill online" id="sse-status-badge">
+        <i class="fa-solid fa-signal"></i> SSE Real-Time Active
+      </div>
+      <button class="btn btn-sm btn-outline" id="btn-toggle-sound" style="border-color:rgba(255,255,255,0.3);color:#fff;">
+        <i class="fa-solid fa-volume-high"></i> Chuông Báo
+      </button>
+      <a href="index.html" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;" target="_blank">Xem Website ↗</a>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- Top Metrics Overview -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+        <div class="metric-info">
+          <h4>Doanh Thu Hôm Nay</h4>
+          <div class="metric-val" id="metric-revenue">0đ</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-receipt"></i></div>
+        <div class="metric-info">
+          <h4>Tổng Số Đơn Hàng</h4>
+          <div class="metric-val" id="metric-total-orders">0</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+        <div class="metric-info">
+          <h4>Đơn Đợi Pha Chế</h4>
+          <div class="metric-val" id="metric-pending-orders" style="color:#ff9800;">0</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="metric-info">
+          <h4>Đã Hoàn Thành</h4>
+          <div class="metric-val" id="metric-completed-orders" style="color:#4caf50;">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: KITCHEN KDS REAL-TIME -->
+    <section id="tab-kds" class="tab-content">
+      <div class="kds-filters">
+        <button class="kds-filter-btn active" data-filter="all">Tất cả đơn</button>
+        <button class="kds-filter-btn" data-filter="pending">⌛ Mới / Đợi pha chế</button>
+        <button class="kds-filter-btn" data-filter="brewing">🍳 Đang pha chế</button>
+        <button class="kds-filter-btn" data-filter="delivering">🛵 Đang giao hàng</button>
+        <button class="kds-filter-btn" data-filter="completed">✅ Đã hoàn tất</button>
+      </div>
+
+      <div class="kds-grid" id="kds-orders-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 2: MENU CRUD & OUT OF STOCK TOGGLE -->
+    <section id="tab-menu" class="tab-content" style="display:none;">
+      <div class="admin-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-size:1.3rem;color:#fff;">Quản Lý Danh Mục Món Ăn</h3>
+            <p style="font-size:0.84rem;color:rgba(255,255,255,0.6);">Gạt công tắc "Hết hàng" để vô hiệu hóa nút mua sản phẩm tức thì trên trang menu.html</p>
+          </div>
+          <button class="btn btn-primary" id="btn-open-add-menu-modal"><i class="fa-solid fa-plus"></i> Thêm Món Mới</button>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="menu-table">
+            <thead>
+              <tr>
+                <th>Hình ảnh</th>
+                <th>Tên món trà</th>
+                <th>Danh mục</th>
+                <th>Giá cơ bản</th>
+                <th>Trạng thái Hết hàng</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="admin-menu-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: WEBHOOK VIETQR SIMULATOR -->
+    <section id="tab-webhook" class="tab-content" style="display:none;">
+      <div class="admin-card" style="max-width:650px;margin:0 auto;">
+        <h3 style="font-size:1.3rem;color:#fff;margin-bottom:0.5rem;"><i class="fa-solid fa-qrcode"></i> Giả Lập Webhook VietQR / Ngân Hàng</h3>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.6);margin-bottom:1.5rem;">Thử nghiệm tự động xác nhận chuyển khoản VietQR cho đơn hàng đang chờ</p>
+
+        <form id="webhook-sim-form">
+          <div class="form-group">
+            <label style="color:#fff;">Chọn Đơn Hàng Cần Thanh Toán:</label>
+            <select id="sim-order-select" style="background:#1e3024;color:#fff;border-color:rgba(74,124,89,0.4);">
+              <!-- Rendered via JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label style="color:#fff;">Số Tiền Chuyển Khoản (VND):</label>
+            <input type="number" id="sim-amount" value="144000" style="background:#1e3024;color:#fff;border-color:rgba(74,124,89,0.4);" />
+          </div>
+
+          <button type="button" class="btn btn-primary btn-block" id="btn-trigger-webhook" style="padding:1rem;margin-top:1rem;">
+            <i class="fa-solid fa-bolt"></i> Phát Tín Hiệu Webhook Thanh Toán VietQR
+          </button>
+        </form>
+
+        <div id="webhook-log" style="margin-top:1.5rem;background:#0d1610;padding:1rem;border-radius:var(--radius-md);font-family:monospace;font-size:0.8rem;color:#81c784;min-height:80px;">
+          > Chờ kích hoạt webhook...
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Add Product Modal -->
+  <div class="tmd-modal-overlay" id="add-menu-overlay"></div>
+  <div class="tmd-option-modal" id="add-menu-modal" style="background:#1a2b20;color:#fff;">
+    <button class="modal-close-btn" id="add-menu-close">&times;</button>
+    <div style="padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+      <h3 style="color:#fff;">Thêm Món Mới Vào Menu</h3>
+    </div>
+    <div class="modal-body">
+      <form id="add-product-form">
+        <div class="form-group">
+          <label style="color:#fff;">Tên món đồ uống *</label>
+          <input type="text" id="new-p-name" placeholder="Ví dụ: Trà Ô Long Mật Ong" required style="background:#0d1610;color:#fff;" />
+        </div>
+        <div class="form-group">
+          <label style="color:#fff;">Giá tiền (VND) *</label>
+          <input type="number" id="new-p-price" placeholder="39000" required style="background:#0d1610;color:#fff;" />
+        </div>
+        <div class="form-group">
+          <label style="color:#fff;">Danh mục</label>
+          <select id="new-p-cat" style="background:#0d1610;color:#fff;">
+            <option value="nguyen-ban">🍃 Trà Nguyên Bản</option>
+            <option value="tra-sua">🥛 Trà Sữa</option>
+            <option value="trai-cay">🍑 Trà Trái Cây</option>
+            <option value="matcha">🍵 Matcha</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="color:#fff;">Đường dẫn hình ảnh</label>
+          <input type="text" id="new-p-img" value="images/product_lotus.png" style="background:#0d1610;color:#fff;" />
+        </div>
+        <div class="form-group">
+          <label style="color:#fff;">Mô tả món</label>
+          <textarea id="new-p-desc" rows="2" style="background:#0d1610;color:#fff;" placeholder="Mô tả hương vị..."></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer" style="background:#0d1610;">
+      <button class="btn btn-primary btn-block" id="btn-save-new-product">Lưu Món Mới</button>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

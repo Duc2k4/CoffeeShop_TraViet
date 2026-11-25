@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Về Chúng Tôi – Trà Việt</title>
+  <meta name="description" content="Câu chuyện ra đời của Trà Việt – từ tình yêu trà đến việc tạo ra một không gian thư giãn đích thực. Giá trị thương hiệu và nguồn gốc nguyên liệu." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .about-hero {
+      background: linear-gradient(135deg, var(--color-green-dark) 0%, var(--color-green) 100%);
+      padding: 10rem 0 6rem;
+      position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 70% 40%, rgba(200,169,110,0.2) 0%, transparent 60%);
+    }
+    .about-hero-content { position: relative; z-index: 1; }
+    .about-hero h1 { color: var(--color-white); font-size: clamp(2.5rem,5vw,4rem); margin-bottom: 1rem; }
+    .about-hero p { color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 600px; line-height: 1.8; }
+
+    .values-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      margin-top: var(--space-xl);
+    }
+    .value-card {
+      padding: 2.5rem 2rem;
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .value-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
+    .value-title { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .value-desc { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.75; }
+
+    .timeline { position: relative; max-width: 700px; margin: var(--space-xl) auto 0; }
+    .timeline::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: var(--color-border); transform: translateX(-50%);
+    }
+    .timeline-item {
+      display: grid; grid-template-columns: 1fr 60px 1fr;
+      gap: 1.5rem; align-items: center; margin-bottom: 3rem;
+    }
+    .timeline-item:nth-child(even) .timeline-content:first-child { order: 1; text-align: right; }
+    .timeline-item:nth-child(even) .timeline-content:last-child { order: 3; }
+    .timeline-dot {
+      width: 48px; height: 48px;
+      background: var(--color-green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(74,124,89,0.4);
+      position: relative; z-index: 1;
+    }
+    .timeline-content { padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-md); border: 1px solid var(--color-border); }
+    .timeline-year { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-green); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .timeline-title { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .timeline-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.65; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: var(--space-xl); }
+    .team-card {
+      text-align: center; padding: 2rem 1.5rem;
+      background: var(--color-white); border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--color-cream); border: 4px solid var(--color-border);
+      margin: 0 auto 1.25rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .team-name { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.25rem; }
+    .team-role { font-size: 0.82rem; color: var(--color-green); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .team-bio { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; }
+
+    .ingredient-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center; margin-bottom: var(--space-xl);
+    }
+    .ingredient-img {
+      border-radius: var(--radius-xl); overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+    }
+    .ingredient-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    @media(max-width:900px) {
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .ingredient-row { grid-template-columns: 1fr; gap: 2rem; }
+      .timeline::before { left: 24px; }
+      .timeline-item { grid-template-columns: 48px 1fr; }
+      .timeline-dot { margin: 0; }
+      .timeline-item:nth-child(even) .timeline-content:first-child { order: unset; text-align: left; }
+    }
+    @media(max-width:600px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar" role="navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z"/></svg></div>
+        <span class="logo-text" style="color:var(--color-green-dark);">Trà Việt</span>
+      </a>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html" style="color:var(--color-green);font-weight:700;">Về chúng tôi</a></li>
+        <li><a href="store.html">Cửa hàng</a></li>
+        <li><a href="promotions.html">Khuyến mãi</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+      <div class="navbar-cta"><a href="menu.html" class="btn btn-sm">Xem menu</a></div>
+      <button class="navbar-toggle" id="navbar-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container about-hero-content">
+      <span class="section-label" style="color:var(--color-gold-light);">Về chúng tôi</span>
+      <h1>Câu chuyện bắt đầu<br>từ một <em>ly trà</em></h1>
+      <p>Từ tình yêu thuần túy với những hương vị trà Việt Nam, chúng tôi đã tạo ra một không gian để mọi người có thể tạm dừng, thư giãn và kết nối.</p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section style="padding:var(--space-3xl) 0; background:var(--color-white);">
+    <div class="container">
+      <div class="ingredient-row" data-animate="fade-left">
+        <div class="ingredient-img">
+          <img src="images/product_lotus.png" alt="Trà sen Việt Nam truyền thống" loading="lazy"/>
+        </div>
+        <div>
+          <span class="section-label">Sứ mệnh</span>
+          <h2 class="section-title">Chúng tôi tin rằng mỗi ly trà<br>là một khoảnh khắc</h2>
+          <p style="color:var(--color-text-muted);line-height:1.85;margin-bottom:1.5rem;">
+            Trà Việt được thành lập với một mong muốn đơn giản: tạo ra một nơi mà mọi người có thể ghé qua, nhâm nhi một ly trà ngon và cảm nhận sự bình yên trong cuộc sống bận rộn.
+          </p>
+          <p style="color:var(--color-text-muted);line-height:1.85;">
+            Chúng tôi không chỉ bán trà – chúng tôi bán những khoảnh khắc thư giãn, những cuộc trò chuyện thân tình và những ký ức đẹp gắn liền với hương trà.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section style="padding:var(--space-3xl) 0; background:var(--color-cream);">
+    <div class="container text-center">
+      <span class="section-label">Giá trị cốt lõi</span>
+      <h2 class="section-title">Những điều chúng tôi<br>luôn gìn giữ</h2>
+      <div class="values-grid">
+        <div class="value-card" data-animate>
+          <div class="value-icon">🌿</div>
+          <h3 class="value-title">Thuần Tự Nhiên</h3>
+          <p class="value-desc">100% nguyên liệu tự nhiên, không chất bảo quản, không màu nhân tạo. Chúng tôi tôn trọng hương vị thuần túy của trà.</p>
+        </div>
+        <div class="value-card" data-animate style="transition-delay:0.1s">
+          <div class="value-icon">🤝</div>
+          <h3 class="value-title">Minh Bạch</h3>
+          <p class="value-desc">Nguồn gốc nguyên liệu rõ ràng, quy trình pha chế công khai. Bạn hoàn toàn biết mình đang uống gì.</p>
+        </div>
+        <div class="value-card" data-animate style="transition-delay:0.2s">
+          <div class="value-icon">💚</div>
+          <h3 class="value-title">Bền Vững</h3>
+          <p class="value-desc">Sử dụng bao bì thân thiện môi trường, hỗ trợ các vùng trà địa phương và không lãng phí nguyên liệu.</p>
+        </div>
+        <div class="value-card" data-animate style="transition-delay:0.05s">
+          <div class="value-icon">⭐</div>
+          <h3 class="value-title">Chất Lượng Ổn Định</h3>
+          <p class="value-desc">Mỗi ly trà được pha theo đúng quy trình, đúng tỉ lệ để đảm bảo hương vị nhất quán dù bạn ghé bất kỳ lúc nào.</p>
+        </div>
+        <div class="value-card" data-animate style="transition-delay:0.15s">
+          <div class="value-icon">😊</div>
+          <h3 class="value-title">Dịch Vụ Tận Tâm</h3>
+          <p class="value-desc">Đội ngũ nhân viên được đào tạo bài bản, luôn vui vẻ và sẵn sàng tư vấn để bạn chọn được ly trà phù hợp nhất.</p>
+        </div>
+        <div class="value-card" data-animate style="transition-delay:0.25s">
+          <div class="value-icon">🏡</div>
+          <h3 class="value-title">Không Gian Thư Giãn</h3>
+          <p class="value-desc">Thiết kế không gian ấm cúng, yên tĩnh để bạn có thể làm việc, học tập hay chỉ đơn giản là nghỉ ngơi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingredients -->
+  <section style="padding:var(--space-3xl) 0; background:var(--color-white);">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:var(--space-xl);">
+        <span class="section-label">Nguyên liệu</span>
+        <h2 class="section-title">Nguồn gốc của<br>từng ly trà</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Chúng tôi cẩn thận lựa chọn từng nguyên liệu từ các vùng nổi tiếng nhất Việt Nam và thế giới.</p>
+      </div>
+
+      <div class="ingredient-row" data-animate="fade-right">
+        <div>
+          <h3 style="font-family:var(--font-heading);font-size:1.6rem;margin-bottom:1rem;">🍃 Trà Ô Long Đài Loan & Cao Nguyên</h3>
+          <p style="color:var(--color-text-muted);line-height:1.85;margin-bottom:1rem;">Chúng tôi nhập trực tiếp trà ô long từ các vùng trà nổi tiếng ở Đài Loan và từ cao nguyên Lâm Đồng. Mỗi lô trà được kiểm tra hương vị trước khi sử dụng.</p>
+          <p style="color:var(--color-text-muted);line-height:1.85;">Trà được bảo quản đúng cách trong hũ kín, tránh ánh nắng và độ ẩm để giữ nguyên hương thơm tự nhiên.</p>
+        </div>
+        <div class="ingredient-img">
+          <img src="images/product_oolong.png" alt="Trà ô long được lựa chọn kỹ lưỡng" loading="lazy"/>
+        </div>
+      </div>
+
+      <div class="ingredient-row" data-animate="fade-left" style="direction:rtl;">
+        <div style="direction:ltr;">
+          <h3 style="font-family:var(--font-heading);font-size:1.6rem;margin-bottom:1rem;">🌸 Hoa Sen & Hoa Lài Tươi</h3>
+          <p style="color:var(--color-text-muted);line-height:1.85;margin-bottom:1rem;">Hoa sen và hoa lài được thu mua từ các vùng trồng hoa uy tín, đảm bảo tươi và thơm. Trà được ủ hoa theo phương pháp truyền thống qua đêm.</p>
+          <p style="color:var(--color-text-muted);line-height:1.85;">Không dùng tinh dầu nhân tạo – chỉ có hương hoa thật sự từ thiên nhiên.</p>
+        </div>
+        <div class="ingredient-img" style="direction:ltr;">
+          <img src="images/product_lotus.png" alt="Hoa sen tươi ủ trà" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section style="padding:var(--space-3xl) 0; background:var(--color-cream);">
+    <div class="container text-center">
+      <span class="section-label">Đội ngũ</span>
+      <h2 class="section-title">Những người tạo nên<br>Trà Việt</h2>
+      <div class="team-grid">
+        <div class="team-card" data-animate>
+          <div class="team-avatar">👩‍🍳</div>
+          <h3 class="team-name">Nguyễn Thị Lan Anh</h3>
+          <p class="team-role">Người sáng lập & Chuyên gia trà</p>
+          <p class="team-bio">Với 10 năm đam mê nghiên cứu trà Việt Nam và quốc tế, Lan Anh muốn mang những hương vị trà thuần túy đến gần hơn với mọi người.</p>
+        </div>
+        <div class="team-card" data-animate style="transition-delay:0.1s">
+          <div class="team-avatar">👨‍🍳</div>
+          <h3 class="team-name">Trần Minh Quân</h3>
+          <p class="team-role">Trưởng pha chế</p>
+          <p class="team-bio">Quân đã thử nghiệm hơn 200 công thức trà để tìm ra những cái tên hoàn hảo nhất có trong thực đơn của Trà Việt ngày hôm nay.</p>
+        </div>
+        <div class="team-card" data-animate style="transition-delay:0.2s">
+          <div class="team-avatar">👩</div>
+          <h3 class="team-name">Phạm Thu Hương</h3>
+          <p class="team-role">Quản lý trải nghiệm khách hàng</p>
+          <p class="team-bio">Hương đảm bảo mỗi khách hàng đều được phục vụ chu đáo và ra về với nụ cười – đó là tiêu chuẩn không thể thỏa hiệp tại Trà Việt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:var(--space-xl) 0;background:var(--color-green-dark);text-align:center;">
+    <div class="container">
+      <h2 style="font-family:var(--font-heading);font-size:2rem;color:white;margin-bottom:1rem;">Ghé thăm chúng tôi hôm nay</h2>
+      <p style="color:rgba(255,255,255,0.75);margin-bottom:2rem;">Một ly trà và một không gian bình yên đang chờ bạn</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="menu.html" class="btn btn-gold" id="about-menu-btn">Xem thực đơn</a>
+        <a href="store.html" class="btn btn-secondary" id="about-store-btn">Tìm cửa hàng</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Trà Việt. Tất cả quyền được bảo lưu.</p>
+        <p class="footer-copy">📍 123 Đường Trà Xanh, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

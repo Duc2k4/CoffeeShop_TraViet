@@ -1,0 +1,110 @@
+[
+  {
+    "id": "sen-vang",
+    "name": "Trà Sen Vàng",
+    "basePrice": 38000,
+    "img": "images/product_lotus.png",
+    "category": "nguyen-ban",
+    "desc": "Trà ủ cùng hoa sen tươi theo phương pháp truyền thống, hương thơm dịu dàng và tinh tế.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "tra-oolong",
+    "name": "Trà Ô Long Nguyên Bản",
+    "basePrice": 35000,
+    "img": "images/product_oolong.png",
+    "category": "nguyen-ban",
+    "desc": "Trà ô long cao nguyên, vị trà đậm đà, hậu vị ngọt thanh tự nhiên không cần thêm đường.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "tra-xanh",
+    "name": "Trà Xanh Thái Nguyên",
+    "basePrice": 32000,
+    "img": "images/Traxanh_TN.png",
+    "category": "nguyen-ban",
+    "desc": "Trà xanh Thái Nguyên thượng hạng, hương cốm non dịu nhẹ, vị chát thanh và hậu ngọt đặc trưng.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "oolong-cream",
+    "name": "Trà Ô Long Kem Sữa",
+    "basePrice": 45000,
+    "img": "images/product_oolong.png",
+    "category": "tra-sua",
+    "desc": "Trà ô long đậm vị, lớp kem sữa béo nhẹ phía trên, cân bằng hoàn hảo giữa vị trà và độ béo ngậy.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "hong-tra-sua",
+    "name": "Hồng Trà Sữa Trân Châu",
+    "basePrice": 42000,
+    "img": "images/product_HTSCT.png",
+    "category": "tra-sua",
+    "desc": "Hồng trà Assam đậm đà pha sữa tươi nguyên kem, thêm trân châu đen dai ngon.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "taro-sua",
+    "name": "Trà Sữa Khoai Môn",
+    "basePrice": 43000,
+    "img": "images/product_TSKM.png",
+    "category": "tra-sua",
+    "desc": "Hương khoai môn thơm đặc trưng, màu tím đẹp mắt, vị béo ngọt dịu.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "jasmine-peach",
+    "name": "Trà Lài Đào",
+    "basePrice": 39000,
+    "img": "images/product_jasmine.png",
+    "category": "trai-cay",
+    "desc": "Hương trà lài thanh nhẹ kết hợp cùng đào tươi, mang đến vị ngọt dịu và dễ uống.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "honey-lemon",
+    "name": "Trà Chanh Mật Ong",
+    "basePrice": 35000,
+    "img": "images/product_honey_lemon.png",
+    "category": "trai-cay",
+    "desc": "Sự kết hợp tươi mát của trà xanh, chanh tươi và mật ong nguyên chất.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "tropical",
+    "name": "Trà Trái Cây Nhiệt Đới",
+    "basePrice": 45000,
+    "img": "images/product_tropical.png",
+    "category": "trai-cay",
+    "desc": "Xoài, chanh dây, thanh long tươi với nền trà xanh mát. Vị chua ngọt hài hòa.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "matcha",
+    "name": "Matcha Sữa Tươi",
+    "basePrice": 49000,
+    "img": "images/product_matcha_latte.png",
+    "category": "matcha",
+    "desc": "Matcha Nhật cao cấp hoà cùng sữa tươi nguyên kem, lớp bọt mịn phía trên.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "matcha-kem",
+    "name": "Matcha Kem Sữa",
+    "basePrice": 52000,
+    "img": "images/product_matcha_kemsua.png",
+    "category": "matcha",
+    "desc": "Matcha đặc sánh phía dưới, lớp kem sữa muối béo nhẹ phủ trên.",
+    "isOutOfStock": false
+  },
+  {
+    "id": "matcha-iced",
+    "name": "Matcha Đá Xay",
+    "basePrice": 55000,
+    "img": "images/product_matcha_daxay.png",
+    "category": "matcha",
+    "desc": "Matcha xay cùng đá và sữa, kết cấu như kem đá mịn, vị mát lạnh.",
+    "isOutOfStock": false
+  }
+]

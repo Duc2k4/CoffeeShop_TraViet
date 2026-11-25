@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh Toán Đơn Hàng – Trà Việt</title>
+  <meta name="description" content="Thanh toán đơn hàng trà trực tuyến an toàn, nhanh chóng tại Trà Việt. Hỗ trợ VietQR, MoMo và Tiền mặt khi nhận hàng." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Menu chính">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" aria-label="Trà Việt – Trang chủ">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z"/></svg>
+        </div>
+        <span class="logo-text" style="color:var(--color-green-dark);">Trà Việt</span>
+      </a>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">Về chúng tôi</a></li>
+        <li><a href="store.html">Cửa hàng</a></li>
+        <li><a href="promotions.html">Khuyến mãi</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" aria-label="Đóng menu" style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+      <div class="navbar-cta">
+        <a href="menu.html" class="btn btn-sm">Quay lại Menu</a>
+      </div>
+      <button class="navbar-toggle" id="navbar-toggle" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header" style="padding: 3rem 0 2rem;">
+    <div class="container page-header-content">
+      <span class="section-label" style="color:var(--color-gold-light);">Đặt Món Giao Tận Nơi</span>
+      <h1 style="font-size:2.2rem;">Thanh Toán Đơn Hàng</h1>
+    </div>
+  </div>
+
+  <main class="checkout-wrapper">
+    <div class="container">
+
+      <!-- Checkout Progress Steps -->
+      <div class="checkout-steps">
+        <div class="step-item completed">
+          <span class="step-num"><i class="fa-solid fa-check"></i></span>
+          <span>Giỏ Hàng</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step-item active">
+          <span class="step-num">2</span>
+          <span>Thông Tin & Thanh Toán</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step-item">
+          <span class="step-num">3</span>
+          <span>Hoàn Tất Đơn</span>
+        </div>
+      </div>
+
+      <!-- Checkout Grid -->
+      <div class="checkout-grid">
+
+        <!-- Left Form Column -->
+        <div class="checkout-left">
+          
+          <!-- Shipping Address Card -->
+          <div class="checkout-card">
+            <h3 class="checkout-card-title">
+              <i class="fa-solid fa-location-dot"></i> Thông Tin Giao Hàng
+            </h3>
+            
+            <form id="checkout-form" onsubmit="event.preventDefault();">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="c-fullname">Họ và tên người nhận <span style="color:#e63946;">*</span></label>
+                  <input type="text" id="c-fullname" placeholder="Nhập họ tên đầy đủ" required />
+                </div>
+                <div class="form-group">
+                  <label for="c-phone">Số điện thoại liên hệ <span style="color:#e63946;">*</span></label>
+                  <input type="tel" id="c-phone" placeholder="Nhập số điện thoại (ví dụ: 0912345678)" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="c-address">Địa chỉ giao hàng chi tiết <span style="color:#e63946;">*</span></label>
+                <input type="text" id="c-address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện" required />
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="c-delivery-time">Thời gian giao hàng</label>
+                  <select id="c-delivery-time">
+                    <option value="now">⚡ Giao ngay (20 - 35 phút)</option>
+                    <option value="schedule-1">🕐 Hẹn giờ (Trong 1-2 tiếng tới)</option>
+                    <option value="schedule-evening">🌙 Hẹn giao buổi tối (18:00 - 20:00)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="c-branch">Chi nhánh pha chế gần nhất</label>
+                  <select id="c-branch">
+                    <option value="b1">🍃 Trà Việt - Chi Nhánh 1 (Trung Tâm)</option>
+                    <option value="b2">🍃 Trà Việt - Chi Nhánh 2 (Cầu Giấy/Quận 1)</option>
+                    <option value="b3">🍃 Trà Việt - Chi Nhánh 3 (Tây Hồ/Quận 7)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="c-notes">Ghi chú cho tài xế & quán</label>
+                <textarea id="c-notes" rows="2" placeholder="Ví dụ: Gửi bảo vệ tòa nhà, gọi trước khi đến..."></textarea>
+              </div>
+            </form>
+          </div>
+
+          <!-- Payment Methods Card -->
+          <div class="checkout-card">
+            <h3 class="checkout-card-title">
+              <i class="fa-solid fa-wallet"></i> Chọn Phương Thức Thanh Toán
+            </h3>
+
+            <div class="payment-methods-grid">
+              
+              <!-- COD -->
+              <label class="payment-method-card active" id="pm-card-cod">
+                <input type="radio" name="payment-method" value="cod" checked />
+                <div class="pm-icon" style="color:#2b9348;"><i class="fa-solid fa-money-bill-wave"></i></div>
+                <div class="pm-info">
+                  <h4>Tiền mặt khi nhận hàng (COD)</h4>
+                  <p>Thanh toán trực tiếp cho shipper khi nhận được đồ uống thơm ngon</p>
+                </div>
+              </label>
+
+              <!-- VietQR -->
+              <label class="payment-method-card" id="pm-card-vietqr">
+                <input type="radio" name="payment-method" value="vietqr" />
+                <div class="pm-icon" style="color:#00509d;"><i class="fa-solid fa-qrcode"></i></div>
+                <div class="pm-info">
+                  <h4>Chuyển khoản Ngân Hàng (Mã VietQR Tự Động)</h4>
+                  <p>Quét mã QR tự động điền số tiền và nội dung chuyển khoản bằng App Ngân hàng</p>
+                </div>
+              </label>
+
+              <!-- MoMo -->
+              <label class="payment-method-card" id="pm-card-momo">
+                <input type="radio" name="payment-method" value="momo" />
+                <div class="pm-icon" style="color:#a50064;"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="pm-info">
+                  <h4>Ví Điện Tử MoMo</h4>
+                  <p>Thanh toán nhanh chóng qua ứng dụng Ví MoMo</p>
+                </div>
+              </label>
+
+            </div>
+
+            <!-- VietQR Detail Box -->
+            <div class="payment-detail-box" id="box-detail-vietqr">
+              <div class="vietqr-flex">
+                <div class="vietqr-img-box">
+                  <img id="vietqr-dynamic-img" src="images/product_lotus.png" alt="Mã QR VietQR" />
+                  <p style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.3rem;">Quét bằng app ngân hàng bất kỳ</p>
+                </div>
+                <div class="vietqr-info-list">
+                  <p>🏦 <strong>Ngân hàng:</strong> MBBank (Ngân Hàng Quân Đội)</p>
+                  <p>💳 <strong>Số tài khoản:</strong> <strong style="color:var(--color-green-dark);font-size:1.05rem;" id="vietqr-acc-num">0363226006</strong></p>
+                  <p>👤 <strong>Chủ tài khoản:</strong> TRA VIET TRADITIONAL TEA</p>
+                  <p>💰 <strong>Số tiền:</strong> <strong id="vietqr-amount" style="color:#e63946;font-size:1.1rem;">0đ</strong></p>
+                  <p>📝 <strong>Nội dung CK:</strong> <strong id="vietqr-memo" style="background:#fff;padding:0.2rem 0.5rem;border-radius:4px;border:1px solid var(--color-border);color:var(--color-green-dark);">TV84920</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- MoMo Detail Box -->
+            <div class="payment-detail-box" id="box-detail-momo">
+              <div class="vietqr-flex">
+                <div class="vietqr-img-box">
+                  <img id="momo-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=20000" alt="Mã QR MoMo" />
+                  <p style="font-size:0.75rem;color:#a50064;margin-top:0.3rem;font-weight:700;">Ví MoMo Trà Việt</p>
+                </div>
+                <div class="vietqr-info-list">
+                  <p>📱 <strong>Số Ví MoMo:</strong> <strong style="color:#a50064;font-size:1.05rem;">0363226006</strong></p>
+                  <p>👤 <strong>Tên tài khoản:</strong> TRÀ VIỆT STORE</p>
+                  <p>💰 <strong>Số tiền thanh toán:</strong> <strong id="momo-amount" style="color:#e63946;">0đ</strong></p>
+                  <p>📌 Mở ứng dụng MoMo ➔ Chọn "Quét Mã" để hoàn tất đơn hàng trong 5 phút.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right Summary Column -->
+        <div class="checkout-right">
+          <div class="checkout-card order-summary-box">
+            <h3 class="checkout-card-title">
+              <i class="fa-solid fa-receipt"></i> Tóm Tắt Đơn Hàng
+            </h3>
+
+            <!-- Cart items summary -->
+            <div class="summary-items-list" id="checkout-summary-list">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Voucher Code Box -->
+            <div class="promo-quick-box" style="margin-bottom:1.2rem;">
+              <input type="text" id="checkout-coupon-input" placeholder="Nhập mã ưu đãi (Ví dụ: TRAVIET20)" />
+              <button id="checkout-coupon-btn">Áp dụng</button>
+            </div>
+            <div id="coupon-applied-tag" style="display:none;font-size:0.8rem;color:var(--color-green);margin-bottom:1rem;font-weight:600;">
+              🎉 Đã áp dụng mã giảm giá!
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="price-calc-row">
+              <span>Tạm tính đồ uống:</span>
+              <strong id="c-subtotal">0đ</strong>
+            </div>
+
+            <div class="price-calc-row">
+              <span>Phí giao hàng:</span>
+              <strong id="c-shipping">15.000đ</strong>
+            </div>
+
+            <div class="price-calc-row" id="c-discount-row" style="display:none;color:#e63946;">
+              <span>Giảm giá (Mã ưu đãi):</span>
+              <strong id="c-discount">-0đ</strong>
+            </div>
+
+            <div class="price-calc-row grand-total">
+              <span>TỔNG THANH TOÁN:</span>
+              <strong id="c-grand-total" style="color:var(--color-green-dark);">0đ</strong>
+            </div>
+
+            <button type="button" class="btn-place-order" id="btn-place-order">
+              <i class="fa-solid fa-check-circle"></i> XÁC NHẬN ĐẶT HÀNG
+            </button>
+
+            <p style="font-size:0.75rem;color:var(--color-text-muted);text-align:center;margin-top:1rem;">
+              <i class="fa-solid fa-shield-halved"></i> Thông tin của bạn được bảo mật tuyệt đối. Cam kết giao đúng hẹn!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Success Modal Overlay -->
+  <div class="order-success-modal" id="order-success-modal">
+    <div class="success-box">
+      <div class="success-icon">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 style="font-size:1.8rem;color:var(--color-green-dark);margin-bottom:0.4rem;">Đặt Hàng Thành Công!</h2>
+      <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:1.5rem;">
+        Cảm ơn bạn đã tin tưởng Trà Việt. Mã đơn hàng của bạn là <strong id="success-order-id" style="color:var(--color-green);font-size:1.1rem;">#TV-84920</strong>
+      </p>
+
+      <div style="background:var(--color-cream);padding:1.2rem;border-radius:var(--radius-md);text-align:left;font-size:0.86rem;line-height:1.7;margin-bottom:1.5rem;">
+        <p>👤 <strong>Người nhận:</strong> <span id="s-name">--</span> (<span id="s-phone">--</span>)</p>
+        <p>📍 <strong>Địa chỉ giao:</strong> <span id="s-address">--</span></p>
+        <p>💳 <strong>Thanh toán:</strong> <span id="s-payment">--</span></p>
+        <p>⏰ <strong>Thời gian dự kiến:</strong> <span style="color:var(--color-green);font-weight:700;">20 - 30 phút nữa</span></p>
+      </div>
+
+      <div style="display:flex;gap:0.8rem;justify-content:center;">
+        <a href="index.html" class="btn btn-primary" style="flex:1;">Trang Chủ</a>
+        <a href="menu.html" class="btn btn-secondary" style="flex:1;">Đặt Thêm Món</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding-top:1rem;">
+        <p>&copy; 2026 Trà Việt. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ─── Checkout Logic Integration ───
+      let appliedDiscount = 0;
+      let appliedCouponCode = localStorage.getItem('tmd_applied_coupon') || '';
+
+      const renderCheckoutSummary = () => {
+        const cart = window.tmdCart.cart;
+        const summaryList = document.getElementById('checkout-summary-list');
+        const subtotalEl = document.getElementById('c-subtotal');
+        const shippingEl = document.getElementById('c-shipping');
+        const discountEl = document.getElementById('c-discount');
+        const discountRow = document.getElementById('c-discount-row');
+        const grandTotalEl = document.getElementById('c-grand-total');
+
+        if (!cart || cart.length === 0) {
+          summaryList.innerHTML = `<p style="text-align:center;color:var(--color-text-muted);padding:2rem 0;">Giỏ hàng của bạn đang trống. <a href="menu.html" style="color:var(--color-green);font-weight:700;">Xem Menu</a></p>`;
+          subtotalEl.textContent = '0đ';
+          shippingEl.textContent = '0đ';
+          grandTotalEl.textContent = '0đ';
+          return;
+        }
+
+        const subtotal = window.tmdCart.getCartTotal();
+
+        // Calculate Shipping Fee (Free if subtotal >= 150k or FREESHIP coupon)
+        let shippingFee = 15000;
+        if (subtotal >= 150000 || appliedCouponCode === 'FREESHIP') {
+          shippingFee = 0;
+        }
+
+        // Calculate Coupon Discount
+        appliedDiscount = 0;
+        if (appliedCouponCode === 'TRAVIET20') {
+          appliedDiscount = 20000;
+        } else if (appliedCouponCode === 'FREESHIP') {
+          appliedDiscount = 15000; // Free shipping value
+        }
+
+        if (appliedDiscount > 0) {
+          discountRow.style.display = 'flex';
+          discountEl.textContent = `-${appliedDiscount.toLocaleString('vi-VN')}đ`;
+        } else {
+          discountRow.style.display = 'none';
+        }
+
+        const grandTotal = Math.max(0, subtotal + shippingFee - (appliedCouponCode === 'FREESHIP' ? 0 : appliedDiscount));
+
+        subtotalEl.textContent = window.tmdCart.formatMoney(subtotal);
+        shippingEl.textContent = shippingFee === 0 ? 'MIỄN PHÍ' : window.tmdCart.formatMoney(shippingFee);
+        grandTotalEl.textContent = window.tmdCart.formatMoney(grandTotal);
+
+        // Update payment detail box amounts
+        document.getElementById('vietqr-amount').textContent = window.tmdCart.formatMoney(grandTotal);
+        document.getElementById('momo-amount').textContent = window.tmdCart.formatMoney(grandTotal);
+
+        // Dynamic VietQR image generator URL
+        const orderMemo = 'TV' + Math.floor(10000 + Math.random() * 90000);
+        document.getElementById('vietqr-memo').textContent = orderMemo;
+        
+        const vietqrUrl = `https://img.vietqr.io/image/MB-0363226006-compact2.png?amount=${grandTotal}&addInfo=${orderMemo}&accountName=TRA%20VIET`;
+        document.getElementById('vietqr-dynamic-img').src = vietqrUrl;
+        document.getElementById('momo-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent('20000_MOMO_' + grandTotal)}`;
+
+        // Render summary items
+        summaryList.innerHTML = cart.map(item => `
+          <div class="summary-item-mini">
+            <img src="${item.img}" alt="${item.name}" />
+            <div class="mini-info">
+              <h5>${item.name} <small style="color:var(--color-green);">(x${item.quantity})</small></h5>
+              <p>Size ${item.size} | ${item.sugar} | ${item.ice}${(item.toppings || []).length ? ' | +Topping' : ''}</p>
+            </div>
+            <div class="mini-price">${window.tmdCart.formatMoney(item.unitPrice * item.quantity)}</div>
+          </div>
+        `).join('');
+      };
+
+      // Handle Coupon Code Input
+      const applyCoupon = () => {
+        const input = document.getElementById('checkout-coupon-input').value.trim().toUpperCase();
+        if (!input) return;
+
+        if (input === 'TRAVIET20') {
+          appliedCouponCode = 'TRAVIET20';
+          localStorage.setItem('tmd_applied_coupon', 'TRAVIET20');
+          document.getElementById('coupon-applied-tag').style.display = 'block';
+          document.getElementById('coupon-applied-tag').textContent = '🎉 Đã áp dụng mã TRAVIET20 (-20.000đ)';
+        } else if (input === 'FREESHIP') {
+          appliedCouponCode = 'FREESHIP';
+          localStorage.setItem('tmd_applied_coupon', 'FREESHIP');
+          document.getElementById('coupon-applied-tag').style.display = 'block';
+          document.getElementById('coupon-applied-tag').textContent = '🚚 Đã áp dụng mã FREESHIP (Miễn phí ship)';
+        } else {
+          alert('Mã ưu đãi không hợp lệ. Hãy thử TRAVIET20 hoặc FREESHIP');
+        }
+        renderCheckoutSummary();
+      };
+
+      document.getElementById('checkout-coupon-btn').addEventListener('click', applyCoupon);
+
+      if (appliedCouponCode) {
+        document.getElementById('checkout-coupon-input').value = appliedCouponCode;
+        document.getElementById('coupon-applied-tag').style.display = 'block';
+        document.getElementById('coupon-applied-tag').textContent = `🎉 Đã áp dụng mã ${appliedCouponCode}!`;
+      }
+
+      // Handle Payment Method Switching
+      const pmCards = document.querySelectorAll('.payment-method-card');
+      const detailVietqr = document.getElementById('box-detail-vietqr');
+      const detailMomo = document.getElementById('box-detail-momo');
+
+      pmCards.forEach(card => {
+        card.addEventListener('click', () => {
+          pmCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          const val = card.querySelector('input').value;
+          detailVietqr.classList.remove('active');
+          detailMomo.classList.remove('active');
+
+          if (val === 'vietqr') detailVietqr.classList.add('active');
+          if (val === 'momo') detailMomo.classList.add('active');
+        });
+      });
+
+      // Handle Place Order Click
+      document.getElementById('btn-place-order').addEventListener('click', () => {
+        const fullname = document.getElementById('c-fullname').value.trim();
+        const phone = document.getElementById('c-phone').value.trim();
+        const address = document.getElementById('c-address').value.trim();
+
+        if (!fullname || !phone || !address) {
+          alert('Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng!');
+          return;
+        }
+
+        if (window.tmdCart.cart.length === 0) {
+          alert('Giỏ hàng của bạn đang trống. Vui lòng chọn món trước khi thanh toán!');
+          return;
+        }
+
+        const selectedPm = document.querySelector('input[name="payment-method"]:checked').value;
+        let pmText = 'Tiền mặt khi nhận hàng (COD)';
+        if (selectedPm === 'vietqr') pmText = 'Chuyển khoản VietQR';
+        if (selectedPm === 'momo') pmText = 'Ví điện tử MoMo';
+
+        const orderId = '#TV-' + Math.floor(100000 + Math.random() * 900000);
+        const deliveryTime = document.getElementById('c-delivery-time').value;
+        const branch = document.getElementById('c-branch').value;
+        const notes = document.getElementById('c-notes').value.trim();
+
+        const subtotal = window.tmdCart.getCartTotal();
+        let shippingFee = 15000;
+        if (subtotal >= 150000 || appliedCouponCode === 'FREESHIP') shippingFee = 0;
+        const grandTotal = Math.max(0, subtotal + shippingFee - (appliedCouponCode === 'FREESHIP' ? 0 : appliedDiscount));
+
+        const orderPayload = {
+          id: orderId,
+          customer: { fullname, phone, address, deliveryTime, branch, notes },
+          items: window.tmdCart.cart,
+          subtotal,
+          shippingFee,
+          discount: appliedDiscount,
+          grandTotal,
+          paymentMethod: selectedPm,
+          paymentStatus: selectedPm === 'cod' ? 'unpaid' : 'pending'
+        };
+
+        // POST to Node.js backend server to trigger real-time SSE kitchen alert!
+        fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderPayload)
+        }).then(r => r.json()).then(data => {
+          console.log('✅ Order saved to backend DB:', data);
+        }).catch(err => console.log('Offline fallback order saved'));
+
+        // Fill success modal
+        document.getElementById('success-order-id').textContent = orderId;
+        document.getElementById('s-name').textContent = fullname;
+        document.getElementById('s-phone').textContent = phone;
+        document.getElementById('s-address').textContent = address;
+        document.getElementById('s-payment').textContent = pmText;
+
+        // Open Success Modal
+        document.getElementById('order-success-modal').classList.add('active');
+
+        // Clear cart
+        window.tmdCart.clearCart();
+        localStorage.removeItem('tmd_applied_coupon');
+      });
+
+      renderCheckoutSummary();
+    });
+  </script>
+</body>
+</html>

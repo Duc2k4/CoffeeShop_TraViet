@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trà Ô Long Kem Sữa – Món Đặc Trưng | Trà Việt</title>
+  <meta name="description" content="Trà ô long kem sữa – Vị trà đậm, kem nhẹ, không quá ngọt. Món đặc trưng của Trà Việt, được hàng trăm khách hàng yêu thích. Đặt ngay!" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { background:var(--color-white); }
+    .sig-hero {
+      min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+      align-items:stretch;
+    }
+    .sig-hero-left {
+      background:linear-gradient(135deg,var(--color-green-dark),var(--color-green));
+      padding:6rem 4rem;
+      display:flex; flex-direction:column; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .sig-hero-left::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 20% 80%,rgba(200,169,110,0.2) 0%,transparent 50%);
+    }
+    .sig-hero-left-content { position:relative; z-index:1; }
+    .sig-hero-right {
+      position:relative; overflow:hidden;
+      background:var(--color-cream);
+    }
+    .sig-hero-right img { width:100%; height:100%; object-fit:cover; }
+    .sig-hero-right .overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(270deg,transparent 60%,rgba(22,44,28,0.3) 100%);
+    }
+
+    .sig-badge {
+      display:inline-flex; gap:0.5rem; align-items:center;
+      background:rgba(200,169,110,0.2); border:1px solid rgba(200,169,110,0.4);
+      color:var(--color-gold-light); font-size:0.75rem; font-weight:700;
+      letter-spacing:0.15em; text-transform:uppercase;
+      padding:0.4rem 1rem; border-radius:var(--radius-full); margin-bottom:1.5rem;
+    }
+    .sig-hero-left h1 { color:var(--color-white); font-size:clamp(2rem,4vw,3rem); margin-bottom:1rem; line-height:1.15; }
+    .sig-hero-left p { color:rgba(255,255,255,0.8); font-size:1rem; line-height:1.8; margin-bottom:2rem; }
+
+    .sig-price-badge {
+      display:inline-flex; align-items:baseline; gap:0.5rem; margin-bottom:2rem;
+    }
+    .sig-price { font-family:var(--font-heading); font-size:2.5rem; font-weight:700; color:var(--color-gold-light); }
+    .sig-price-unit { font-size:1rem; color:rgba(255,255,255,0.65); }
+
+    .sig-ingredients { margin:3rem 0; padding:3rem 0; background:var(--color-cream); }
+    .sig-ingredients-inner { max-width:1000px; margin:0 auto; padding:0 2rem; }
+    .ingredients-list { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2rem; }
+    .ingredient-chip {
+      background:var(--color-white); border:1px solid var(--color-border);
+      border-radius:var(--radius-lg); padding:1.5rem 1rem; text-align:center;
+      transition:all var(--transition-base);
+    }
+    .ingredient-chip:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+    .ingredient-chip .i-icon { font-size:2rem; margin-bottom:0.75rem; }
+    .ingredient-chip .i-name { font-weight:600; font-size:0.88rem; margin-bottom:0.3rem; }
+    .ingredient-chip .i-desc { font-size:0.78rem; color:var(--color-text-muted); line-height:1.5; }
+
+    .sig-reviews { max-width:1000px; margin:3rem auto; padding:0 2rem; }
+    .sig-review-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1.5rem; }
+    .sig-review {
+      background:var(--color-white); border:1px solid var(--color-border);
+      border-radius:var(--radius-lg); padding:1.75rem;
+    }
+    .sig-review .stars { color:var(--color-gold); margin-bottom:0.75rem; }
+    .sig-review .text { font-size:0.88rem; color:var(--color-text-muted); line-height:1.75; font-style:italic; margin-bottom:1rem; }
+    .sig-review .author { font-weight:600; font-size:0.85rem; }
+
+    .sig-cta {
+      background:linear-gradient(135deg,var(--color-green-dark),var(--color-green));
+      padding:4rem 2rem; text-align:center;
+    }
+    .sig-cta h2 { font-family:var(--font-heading); font-size:2rem; color:white; margin-bottom:0.75rem; }
+    .sig-cta p { color:rgba(255,255,255,0.8); margin-bottom:2rem; }
+
+    @media(max-width:800px) {
+      .sig-hero { grid-template-columns:1fr; }
+      .sig-hero-right { min-height:300px; }
+      .sig-hero-left { padding:5rem 2rem 3rem; }
+      .ingredients-list { grid-template-columns:repeat(2,1fr); }
+      .sig-review-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="lp-nav" style="background:rgba(22,44,28,0.95);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:1000;padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:var(--font-heading);font-size:1.3rem;color:var(--color-white);display:flex;align-items:center;gap:0.5rem;" id="sig-logo">🍵 Trà Việt</a>
+    <div style="display:flex;gap:0.75rem;">
+      <a href="menu.html" class="btn btn-sm btn-secondary" id="sig-nav-menu">Xem menu</a>
+      <a href="https://zalo.me/0363226006" target="_blank" class="btn btn-sm btn-gold" id="sig-nav-order">Đặt ngay</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="sig-hero" style="padding-top:70px;">
+    <div class="sig-hero-left">
+      <div class="sig-hero-left-content">
+        <div class="sig-badge">⭐ Món đặc trưng số 1</div>
+        <h1>Trà Ô Long<br>Kem Sữa</h1>
+        <p>Vị trà đậm, kem nhẹ, không quá ngọt. Từng ngụm là cả một trải nghiệm – đắng nhẹ của trà, béo dịu của kem và hậu ngọt thanh tự nhiên.</p>
+        <div class="sig-price-badge">
+          <span class="sig-price">45.000đ</span>
+          <span class="sig-price-unit">/ ly size M</span>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="https://zalo.me/0363226006" target="_blank" class="btn btn-gold btn-lg" id="sig-order-zalo">💬 Đặt qua Zalo</a>
+          <a href="tel:0363226006" class="btn btn-secondary btn-lg" id="sig-call">📞 Gọi ngay</a>
+        </div>
+        <div style="margin-top:2rem;display:flex;gap:2rem;">
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:1.8rem;color:var(--color-gold-light);font-weight:700;">★ 4.9</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Đánh giá</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:1.8rem;color:var(--color-gold-light);font-weight:700;">200+</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Đơn mỗi tuần</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:1.8rem;color:var(--color-gold-light);font-weight:700;">#1</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);">Bán chạy nhất</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sig-hero-right">
+      <img src="images/product_oolong.png" alt="Trà ô long kem sữa Trà Việt – Món đặc trưng số 1" />
+      <div class="overlay"></div>
+    </div>
+  </div>
+
+  <!-- Ingredients -->
+  <div class="sig-ingredients">
+    <div class="sig-ingredients-inner">
+      <div class="text-center">
+        <span class="section-label">Thành phần</span>
+        <h2 class="section-title" style="font-size:1.8rem;">Chỉ những gì tốt nhất<br>cho bạn</h2>
+      </div>
+      <div class="ingredients-list">
+        <div class="ingredient-chip" data-animate>
+          <div class="i-icon">🍃</div>
+          <div class="i-name">Trà Ô Long Cao Nguyên</div>
+          <div class="i-desc">Nguồn gốc Lâm Đồng, thu hái thủ công, hương thơm tự nhiên</div>
+        </div>
+        <div class="ingredient-chip" data-animate style="transition-delay:0.1s">
+          <div class="i-icon">🥛</div>
+          <div class="i-name">Sữa Tươi Nguyên Kem</div>
+          <div class="i-desc">Sữa tươi không tiệt trùng 100%, béo vừa phải và ngọt tự nhiên</div>
+        </div>
+        <div class="ingredient-chip" data-animate style="transition-delay:0.2s">
+          <div class="i-icon">🧂</div>
+          <div class="i-name">Kem Muối Đặc Biệt</div>
+          <div class="i-desc">Công thức kem sữa muối độc quyền, béo nhẹ và cân bằng vị</div>
+        </div>
+        <div class="ingredient-chip" data-animate style="transition-delay:0.3s">
+          <div class="i-icon">🧊</div>
+          <div class="i-name">Đá Sạch Tinh Lọc</div>
+          <div class="i-desc">Đá làm từ nước tinh lọc RO, không mùi và đảm bảo vệ sinh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <div class="sig-reviews">
+    <div class="text-center">
+      <span class="section-label">Đánh giá thực tế</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Khách hàng nói gì<br>về món này?</h2>
+    </div>
+    <div class="sig-review-grid">
+      <div class="sig-review" data-animate>
+        <div class="stars">★★★★★</div>
+        <p class="text">"Vị trà rõ ràng, không bị béo quá. Uống xong vẫn cảm nhận được hương trà thơm lâu trong miệng. Mình order mỗi ngày!"</p>
+        <div class="author">— Quốc Bảo, nhân viên văn phòng</div>
+      </div>
+      <div class="sig-review" data-animate style="transition-delay:0.1s">
+        <div class="stars">★★★★★</div>
+        <p class="text">"Lớp kem sữa muối phía trên cực kỳ thơm. Trộn lên uống cùng thì vị trà và kem hòa quyện hoàn hảo. Best seller xứng đáng!"</p>
+        <div class="author">— Minh Thư, sinh viên</div>
+      </div>
+      <div class="sig-review" data-animate style="transition-delay:0.2s">
+        <div class="stars">★★★★★</div>
+        <p class="text">"Đã thử nhiều chỗ bán trà kem nhưng ở đây ngon nhất. Vị trà đậm đà hơn hẳn, kem không quá béo và ngọt vừa phải."</p>
+        <div class="author">— Hương Giang, blogger ẩm thực</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sig-cta">
+    <h2>Sẵn sàng thử chưa? 🍵</h2>
+    <p>Đặt ngay hôm nay – Giao hàng trong 30 phút hoặc ghé trực tiếp tại quán</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://zalo.me/0363226006" target="_blank" class="btn btn-gold btn-lg" id="sig-cta-zalo">💬 Đặt qua Zalo</a>
+      <a href="store.html" class="btn btn-secondary btn-lg" id="sig-cta-store">📍 Đến quán</a>
+      <a href="menu.html" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,0.4);color:white;" id="sig-cta-menu">📋 Xem full menu</a>
+    </div>
+  </div>
+
+  <footer style="background:var(--color-brown-dark);color:rgba(255,255,255,0.6);text-align:center;padding:1.5rem;font-size:0.82rem;">
+    © 2025 Trà Việt &nbsp;|&nbsp; 📍 123 Đường Trà Xanh, Quận 3, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo" id="sig-float-zalo">
+      <span class="icon">💬</span> Đặt ngay qua Zalo
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đang Gần Quán? Ghé Ngay Trà Việt | Không Gian Yên Tĩnh</title>
+  <meta name="description" content="Đang ở gần khu vực Quận 3? Ghé ngay Trà Việt – không gian yên tĩnh để học tập, làm việc và thưởng thức trà ngon. Check-in nhận quà!" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { background:var(--color-white); }
+    .nearby-hero {
+      min-height:100vh;
+      background:linear-gradient(135deg, rgba(22,44,28,0.9) 0%, rgba(46,92,62,0.8) 100%),
+                 url('images/hero_bg.png') center/cover no-repeat;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding:6rem 2rem 4rem;
+    }
+    .nearby-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem); color:white; margin-bottom:1rem; }
+    .nearby-hero p { color:rgba(255,255,255,0.85); font-size:1.1rem; max-width:580px; margin:0 auto 2.5rem; line-height:1.8; }
+
+    .nearby-main { max-width:1100px; margin:0 auto; padding:4rem 2rem; display:grid; grid-template-columns:1fr 1.2fr; gap:4rem; align-items:start; }
+
+    .space-list { display:flex; flex-direction:column; gap:1.25rem; margin-top:2rem; }
+    .space-item {
+      display:flex; gap:1.25rem; align-items:center;
+      background:var(--color-white); border:1px solid var(--color-border);
+      border-radius:var(--radius-lg); padding:1.25rem;
+      transition:all var(--transition-base);
+    }
+    .space-item:hover { transform:translateX(6px); box-shadow:var(--shadow-md); border-color:var(--color-green); }
+    .space-icon { font-size:2.2rem; flex-shrink:0; }
+    .space-title { font-weight:600; font-size:0.95rem; margin-bottom:0.25rem; }
+    .space-desc { font-size:0.84rem; color:var(--color-text-muted); line-height:1.5; }
+
+    .nearby-checkin-card {
+      background:linear-gradient(135deg,var(--color-green-dark),var(--color-green));
+      border-radius:var(--radius-xl); padding:2.5rem;
+      color:white; text-align:center; margin-top:2rem;
+    }
+    .nearby-checkin-card h3 { font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem; }
+    .nearby-checkin-card p { color:rgba(255,255,255,0.8); font-size:0.9rem; margin-bottom:1.5rem; line-height:1.7; }
+    .checkin-reward { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(200,169,110,0.25); border:1px solid rgba(200,169,110,0.4); color:var(--color-gold-light); font-size:0.9rem; font-weight:600; padding:0.5rem 1.25rem; border-radius:var(--radius-full); margin-bottom:1.5rem; }
+
+    .map-big {
+      background:var(--color-cream); border:2px solid var(--color-border);
+      border-radius:var(--radius-xl); min-height:350px;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; padding:2rem; margin-top:1.5rem;
+    }
+
+    .info-strip {
+      background:var(--color-cream); padding:2rem;
+      border-radius:var(--radius-xl); margin-top:1.5rem;
+    }
+    .info-strip-items { display:flex; flex-wrap:wrap; gap:1.5rem; }
+    .info-strip-item { display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; }
+    .info-strip-icon { font-size:1.3rem; }
+
+    .gallery-row {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1rem; margin:3rem 0;
+    }
+    .gallery-row-item { border-radius:var(--radius-md); overflow:hidden; aspect-ratio:4/3; }
+    .gallery-row-item img { width:100%; height:100%; object-fit:cover; transition:transform var(--transition-slow); }
+    .gallery-row-item:hover img { transform:scale(1.06); }
+
+    @media(max-width:800px) {
+      .nearby-main { grid-template-columns:1fr; gap:2rem; }
+      .gallery-row { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(22,44,28,0.95);backdrop-filter:blur(16px);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:var(--font-heading);font-size:1.3rem;color:white;display:flex;align-items:center;gap:0.5rem;" id="nearby-logo">🍵 Trà Việt</a>
+    <div style="display:flex;gap:0.75rem;">
+      <a href="https://maps.google.com" target="_blank" class="btn btn-sm btn-secondary" id="nearby-maps-nav">📍 Chỉ đường</a>
+      <a href="https://zalo.me/0363226006" target="_blank" class="btn btn-sm btn-gold" id="nearby-zalo-nav">💬 Zalo</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="nearby-hero">
+    <div class="hero-badge" style="margin-bottom:1.5rem;">
+      <span class="dot"></span> Đang mở cửa – 7:00 đến 22:00
+    </div>
+    <h1>Đang Ở Gần Quận 3?<br>Ghé Ngay Trà Việt!</h1>
+    <p>Một không gian yên tĩnh để học tập, làm việc hoặc trò chuyện bên những ly trà ngon được pha mới mỗi ngày.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <a href="https://maps.google.com" target="_blank" class="btn btn-gold btn-lg" id="nearby-hero-maps">
+        <i class="fa-solid fa-map-location-dot"></i> Chỉ đường ngay
+      </a>
+      <a href="tel:0363226006" class="btn btn-secondary btn-lg" id="nearby-hero-call">
+        📞 Gọi để hỏi đường
+      </a>
+    </div>
+    <div style="margin-top:2.5rem;background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-xl);padding:1.25rem 2.5rem;color:rgba(255,255,255,0.9);font-size:0.92rem;">
+      📍 123 Đường Trà Xanh, Phường Bình Yên, Quận 3, TP.HCM
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="nearby-main">
+    <div>
+      <span class="section-label">Không gian</span>
+      <h2 style="font-family:var(--font-heading);font-size:1.8rem;margin-bottom:0.75rem;">Lý do để ghé thăm<br>hôm nay</h2>
+
+      <div class="space-list">
+        <div class="space-item" data-animate>
+          <span class="space-icon">📚</span>
+          <div>
+            <div class="space-title">Góc học tập & làm việc</div>
+            <div class="space-desc">WiFi tốc độ cao, ổ cắm điện ở mỗi bàn, không gian yên tĩnh. Hoàn hảo cho những buổi tập trung dài.</div>
+          </div>
+        </div>
+        <div class="space-item" data-animate style="transition-delay:0.05s">
+          <span class="space-icon">💬</span>
+          <div>
+            <div class="space-title">Gặp gỡ bạn bè</div>
+            <div class="space-desc">Bàn nhóm rộng rãi, không khí vui vẻ và thoải mái. Chỗ ngồi cho nhóm 2-10 người.</div>
+          </div>
+        </div>
+        <div class="space-item" data-animate style="transition-delay:0.1s">
+          <span class="space-icon">☕</span>
+          <div>
+            <div class="space-title">Thưởng thức trà ngon</div>
+            <div class="space-desc">20+ loại trà được pha mới mỗi ngày, điều chỉnh độ ngọt và đá theo ý bạn.</div>
+          </div>
+        </div>
+        <div class="space-item" data-animate style="transition-delay:0.15s">
+          <span class="space-icon">📸</span>
+          <div>
+            <div class="space-title">Check-in đẹp</div>
+            <div class="space-desc">Góc chụp ảnh được thiết kế sẵn, ánh sáng tự nhiên đẹp cả ngày.</div>
+          </div>
+        </div>
+        <div class="space-item" data-animate style="transition-delay:0.2s">
+          <span class="space-icon">🅿️</span>
+          <div>
+            <div class="space-title">Đậu xe tiện lợi</div>
+            <div class="space-desc">Bãi xe máy miễn phí trước quán 15 chỗ. Bãi xe ô tô cách 100m.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkin offer -->
+      <div class="nearby-checkin-card" style="margin-top:2rem;" data-animate>
+        <div class="checkin-reward">📸 Check-in nhận topping FREE</div>
+        <h3>Ghé quán & Check-in Nhận Quà</h3>
+        <p>Tag <strong>@TràViệt</strong> trên Facebook hoặc Instagram khi ghé quán, show bài đăng cho nhân viên để nhận ngay 1 topping miễn phí cho ly trà của bạn!</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+          <a href="https://facebook.com/traviet" target="_blank" class="btn btn-gold" id="nearby-fb-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </a>
+          <a href="https://instagram.com/traviet" target="_blank" class="btn btn-secondary" id="nearby-ig-btn">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: Map + Gallery -->
+    <div>
+      <span class="section-label">Địa chỉ</span>
+      <h2 style="font-family:var(--font-heading);font-size:1.8rem;margin-bottom:0.75rem;">Cách bạn<br>không xa đâu!</h2>
+
+      <div class="info-strip" data-animate>
+        <div class="info-strip-items">
+          <div class="info-strip-item">
+            <span class="info-strip-icon">📍</span>
+            <span><strong>123 Đường Trà Xanh</strong><br>Phường Bình Yên, Quận 3</span>
+          </div>
+          <div class="info-strip-item">
+            <span class="info-strip-icon">⏰</span>
+            <span><strong>7:00 – 22:00</strong><br>Thứ 7 & CN: 7:00 – 23:00</span>
+          </div>
+          <div class="info-strip-item">
+            <span class="info-strip-icon">📞</span>
+            <a href="tel:0363226006" style="color:var(--color-green);font-weight:600;">0363 226 006</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-big" data-animate>
+        <div>
+          <div style="font-size:4rem;margin-bottom:1rem;">🗺️</div>
+          <h3 style="font-family:var(--font-heading);font-size:1.3rem;margin-bottom:0.5rem;">Mở Google Maps</h3>
+          <p style="color:var(--color-text-muted);margin-bottom:1.5rem;font-size:0.9rem;">Tìm đường nhanh nhất đến Trà Việt</p>
+          <a href="https://maps.google.com" target="_blank" class="btn btn-primary" id="nearby-maps-btn">
+            <i class="fa-solid fa-map-location-dot"></i> Chỉ đường ngay
+          </a>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="gallery-row" data-animate>
+        <div class="gallery-row-item">
+          <img src="images/hero_bg.png" alt="Không gian quán Trà Việt" loading="lazy" />
+        </div>
+        <div class="gallery-row-item">
+          <img src="images/product_oolong.png" alt="Trà ô long kem sữa" loading="lazy" />
+        </div>
+        <div class="gallery-row-item">
+          <img src="images/product_lotus.png" alt="Trà sen vàng" loading="lazy" />
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="menu.html" class="btn btn-primary btn-lg" id="nearby-menu-btn">
+          <i class="fa-solid fa-book-open"></i> Xem thực đơn đầy đủ
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background:var(--color-brown-dark);color:rgba(255,255,255,0.6);text-align:center;padding:1.5rem;font-size:0.82rem;">
+    © 2025 Trà Việt &nbsp;|&nbsp; 📍 123 Đường Trà Xanh, Quận 3, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://maps.google.com" target="_blank" class="float-btn" style="background:var(--color-green-dark);" id="nearby-float-maps">
+      <span class="icon">📍</span> Chỉ đường
+    </a>
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo" id="nearby-float-zalo">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thực Đơn – Trà Việt</title>
+  <meta name="description" content="Khám phá thực đơn trà phong phú của Trà Việt – Trà nguyên bản, trà sữa, trà trái cây, matcha. Điều chỉnh độ ngọt và đá theo ý thích." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ─── Menu page specific ─── */
+    .menu-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin: var(--space-lg) 0 var(--space-xl);
+    }
+
+    .filter-btn {
+      padding: 0.65rem 1.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.86rem;
+      font-weight: 600;
+      border: 2px solid var(--color-border);
+      color: var(--color-text-muted);
+      background: var(--color-white);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-green);
+      color: var(--color-green);
+    }
+
+    .filter-btn.active {
+      background: var(--color-green);
+      border-color: var(--color-green);
+      color: var(--color-white);
+      box-shadow: 0 4px 12px rgba(74,124,89,0.3);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .menu-item {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--color-green-light);
+    }
+
+    .menu-item.hidden {
+      display: none;
+    }
+
+    .menu-item-img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--color-cream);
+    }
+
+    .menu-item-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .menu-item:hover .menu-item-img img { transform: scale(1.06); }
+
+    .menu-item-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .menu-item-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-item-desc {
+      font-size: 0.86rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+
+    .menu-item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .meta-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-full);
+      background: var(--color-cream);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+    }
+
+    .menu-item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--color-border);
+      padding-top: 1rem;
+      margin-top: auto;
+    }
+
+    .menu-item-price {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-green);
+    }
+
+    .menu-item-price small {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    .menu-section-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--color-text);
+      margin: 3rem 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .menu-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .menu-customization {
+      background: var(--color-cream);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      margin-bottom: var(--space-xl);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .custom-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+    }
+
+    .custom-icon { font-size: 1.2rem; }
+
+    .topping-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: var(--space-sm);
+    }
+
+    .topping-tag {
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 2px solid var(--color-border);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .topping-tag:hover, .topping-tag.selected {
+      border-color: var(--color-green);
+      color: var(--color-green);
+      background: rgba(74,124,89,0.06);
+    }
+
+    @media(max-width:900px) { .menu-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:600px) { .menu-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Menu chính">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" aria-label="Trà Việt – Trang chủ">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z"/></svg>
+        </div>
+        <span class="logo-text" style="color:var(--color-green-dark);">Trà Việt</span>
+      </a>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="menu.html" style="color:var(--color-green);font-weight:700;">Menu</a></li>
+        <li><a href="about.html">Về chúng tôi</a></li>
+        <li><a href="store.html">Cửa hàng</a></li>
+        <li><a href="promotions.html">Khuyến mãi</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" aria-label="Đóng menu" style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+      <div class="navbar-cta">
+        <a href="#" class="btn btn-sm" onclick="window.open('https://zalo.me/0363226006','_blank')">Đặt qua Zalo</a>
+      </div>
+      <button class="navbar-toggle" id="navbar-toggle" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container page-header-content">
+      <span class="section-label" style="color:var(--color-gold-light);">Thực đơn</span>
+      <h1>Khám phá thế giới trà của chúng tôi</h1>
+      <p>Chọn theo khẩu vị và điều chỉnh theo sở thích của riêng bạn</p>
+    </div>
+  </div>
+
+  <section style="padding:var(--space-xl) 0 var(--space-3xl);">
+    <div class="container">
+
+      <!-- Customization Info -->
+      <div class="menu-customization" data-animate>
+        <div class="custom-item"><span class="custom-icon">🍬</span><span>Điều chỉnh <strong>độ ngọt</strong>: 0% / 30% / 50% / 70% / 100%</span></div>
+        <div class="custom-item"><span class="custom-icon">🧊</span><span>Điều chỉnh <strong>đá</strong>: Không đá / Ít đá / Bình thường / Nhiều đá</span></div>
+        <div class="custom-item"><span class="custom-icon">📏</span><span><strong>Size</strong>: M (350ml) / L (500ml)</span></div>
+        <div class="custom-item"><span class="custom-icon">✨</span><span>Thêm <strong>topping</strong> tuỳ ý</span></div>
+      </div>
+
+      <!-- Topping section -->
+      <div style="margin-bottom:var(--space-xl);" data-animate>
+        <h3 class="menu-section-title">🫧 Topping thêm <span style="font-size:0.95rem;color:var(--color-text-muted);font-family:var(--font-body);font-weight:400;">(+7.000đ/loại)</span></h3>
+        <div class="topping-grid">
+          <span class="topping-tag">Trân châu đen</span>
+          <span class="topping-tag">Trân châu trắng</span>
+          <span class="topping-tag">Thạch nha đam</span>
+          <span class="topping-tag">Thạch trái cây</span>
+          <span class="topping-tag">Pudding trứng</span>
+          <span class="topping-tag">Kem phô mai</span>
+          <span class="topping-tag">Thạch cà phê</span>
+          <span class="topping-tag">Nước cốt dừa</span>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="menu-filters" id="menu-filters">
+        <button class="filter-btn active" data-filter="all" id="filter-all">Tất cả</button>
+        <button class="filter-btn" data-filter="nguyen-ban" id="filter-nguyen-ban">🍃 Trà Nguyên Bản</button>
+        <button class="filter-btn" data-filter="tra-sua" id="filter-tra-sua">🥛 Trà Sữa</button>
+        <button class="filter-btn" data-filter="trai-cay" id="filter-trai-cay">🍑 Trà Trái Cây</button>
+        <button class="filter-btn" data-filter="matcha" id="filter-matcha">🍵 Matcha</button>
+        <button class="filter-btn" data-filter="ban-chay" id="filter-ban-chay">🔥 Bán Chạy</button>
+        <button class="filter-btn" data-filter="moi" id="filter-moi">✨ Mới</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="menu-grid" id="menu-grid">
+
+        <!-- TRÀ NGUYÊN BẢN -->
+        <article class="menu-item" data-category="nguyen-ban ban-chay" id="sen-vang">
+          <div class="menu-item-img">
+            <img src="images/product_lotus.png" alt="Trà sen vàng" loading="lazy" />
+            <span class="product-badge">Bán chạy</span>
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Sen Vàng</h3>
+            <p class="menu-item-desc">Trà ủ cùng hoa sen tươi theo phương pháp truyền thống, hương thơm dịu dàng và tinh tế. Thích hợp uống nóng hoặc lạnh.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍃 Nguyên bản</span>
+              <span class="meta-tag">M: 38.000đ / L: 45.000đ</span>
+              <span class="meta-tag">Ít ngọt</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">38.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="sen-vang" data-product-name="Trà Sen Vàng" data-product-price="38000" data-product-img="images/product_lotus.png" id="order-sen-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="nguyen-ban" id="tra-oolong">
+          <div class="menu-item-img">
+            <img src="images/product_oolong.png" alt="Trà ô long" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Ô Long Nguyên Bản</h3>
+            <p class="menu-item-desc">Trà ô long cao nguyên, vị trà đậm đà, hậu vị ngọt thanh tự nhiên không cần thêm đường.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍃 Nguyên bản</span>
+              <span class="meta-tag">M: 35.000đ / L: 42.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">35.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="tra-oolong" data-product-name="Trà Ô Long Nguyên Bản" data-product-price="35000" data-product-img="images/product_oolong.png" id="order-oolong-plain-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="nguyen-ban" id="tra-xanh">
+          <div class="menu-item-img">
+            <img src="images/Traxanh_TN.png" alt="Trà xanh Thái Nguyên" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Xanh Thái Nguyên</h3>
+            <p class="menu-item-desc">Trà xanh Thái Nguyên thượng hạng, hương cốm non dịu nhẹ, vị chát thanh và hậu ngọt đặc trưng.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍃 Nguyên bản</span>
+              <span class="meta-tag">M: 32.000đ / L: 38.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">32.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="tra-xanh" data-product-name="Trà Xanh Thái Nguyên" data-product-price="32000" data-product-img="images/Traxanh_TN.png" id="order-green-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- TRÀ SỮA -->
+        <article class="menu-item" data-category="tra-sua ban-chay" id="oolong-cream">
+          <div class="menu-item-img">
+            <img src="images/product_oolong.png" alt="Trà ô long kem sữa" loading="lazy" />
+            <span class="product-badge">Bán chạy #1</span>
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Ô Long Kem Sữa</h3>
+            <p class="menu-item-desc">Trà ô long đậm vị, lớp kem sữa béo nhẹ phía trên, cân bằng hoàn hảo giữa vị trà và độ béo ngậy.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🥛 Trà sữa</span>
+              <span class="meta-tag">M: 45.000đ / L: 52.000đ</span>
+              <span class="meta-tag">Muối kem</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">45.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="oolong-cream" data-product-name="Trà Ô Long Kem Sữa" data-product-price="45000" data-product-img="images/product_oolong.png" id="order-oolong-cream-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="tra-sua moi" id="hong-tra-sua">
+          <div class="menu-item-img">
+            <img src="images/product_HTSCT.png" alt="Hồng trà sữa trân châu" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Hồng Trà Sữa Trân Châu</h3>
+            <p class="menu-item-desc">Hồng trà Assam đậm đà pha sữa tươi nguyên kem, thêm trân châu đen dai ngon. Cổ điển và không bao giờ lỗi mốt.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🥛 Trà sữa</span>
+              <span class="meta-tag">M: 42.000đ / L: 49.000đ</span>
+              <span class="meta-tag">Mới</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">42.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="hong-tra-sua" data-product-name="Hồng Trà Sữa Trân Châu" data-product-price="42000" data-product-img="images/product_HTSCT.png" id="order-hong-tra-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="tra-sua" id="taro-sua">
+          <div class="menu-item-img">
+            <img src="images/product_TSKM.png" alt="Trà sữa khoai môn" loading="lazy" />
+          </div> 
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Sữa Khoai Môn</h3>
+            <p class="menu-item-desc">Hương khoai môn thơm đặc trưng, màu tím đẹp mắt, vị béo ngọt dịu. Được nhiều khách hàng trẻ yêu thích.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🥛 Trà sữa</span>
+              <span class="meta-tag">M: 43.000đ / L: 50.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">43.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="taro-sua" data-product-name="Trà Sữa Khoai Môn" data-product-price="43000" data-product-img="images/product_TSKM.png" id="order-taro-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- TRÀ TRÁI CÂY -->
+        <article class="menu-item" data-category="trai-cay ban-chay moi" id="jasmine-peach">
+          <div class="menu-item-img">
+            <img src="images/product_jasmine.png" alt="Trà lài đào" loading="lazy" />
+            <span class="product-badge" style="background:var(--color-green);color:white;">Mới & Yêu thích</span>
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Lài Đào</h3>
+            <p class="menu-item-desc">Hương trà lài thanh nhẹ kết hợp cùng đào tươi, mang đến vị ngọt dịu và dễ uống. Thơm mát tự nhiên.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍑 Trái cây</span>
+              <span class="meta-tag">M: 39.000đ / L: 46.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">39.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="jasmine-peach" data-product-name="Trà Lài Đào" data-product-price="39000" data-product-img="images/product_jasmine.png" id="order-jasmine-peach-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="trai-cay" id="honey-lemon">
+          <div class="menu-item-img">
+            <img src="images/product_honey_lemon.png" alt="Trà chanh mật ong" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Chanh Mật Ong</h3>
+            <p class="menu-item-desc">Sự kết hợp tươi mát của trà xanh, chanh tươi và mật ong nguyên chất. Giúp thanh nhiệt, sảng khoái.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍋 Trái cây</span>
+              <span class="meta-tag">M: 35.000đ / L: 42.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">35.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="honey-lemon" data-product-name="Trà Chanh Mật Ong" data-product-price="35000" data-product-img="images/product_honey_lemon.png" id="order-lemon-honey-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="trai-cay" id="tropical">
+          <div class="menu-item-img">
+            <img src="images/product_tropical.png" alt="Trà trái cây nhiệt đới" loading="lazy" />
+            <span class="product-badge" style="background:#e87c2e;color:white;">Đặc biệt</span>
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Trà Trái Cây Nhiệt Đới</h3>
+            <p class="menu-item-desc">Xoài, chanh dây, thanh long tươi với nền trà xanh mát. Màu sắc đẹp, vị chua ngọt hài hòa và giải nhiệt cực tốt.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🌴 Nhiệt đới</span>
+              <span class="meta-tag">M: 45.000đ / L: 52.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">45.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="tropical" data-product-name="Trà Trái Cây Nhiệt Đới" data-product-price="45000" data-product-img="images/product_tropical.png" id="order-tropical-menu-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- MATCHA -->
+        <article class="menu-item" data-category="matcha ban-chay" id="matcha">
+          <div class="menu-item-img">
+            <img src="images/product_matcha_latte.png" alt="Matcha sữa tươi" loading="lazy" />
+          </div> 
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Matcha Sữa Tươi</h3>
+            <p class="menu-item-desc">Matcha Nhật cao cấp hoà cùng sữa tươi nguyên kem, lớp bọt mịn phía trên. Đắng nhẹ, thơm đặc trưng và rất đẹp mắt.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍵 Matcha</span>
+              <span class="meta-tag">M: 49.000đ / L: 56.000đ</span>
+              <span class="meta-tag">Matcha Nhật</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">49.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="matcha" data-product-name="Matcha Sữa Tươi" data-product-price="49000" data-product-img="images/product_matcha_latte.png" id="order-matcha-menu-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="matcha moi" id="matcha-kem">
+          <div class="menu-item-img">
+            <img src="images/product_matcha_kemsua.png" alt="Matcha kem sữa" loading="lazy" />
+          
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Matcha Kem Sữa</h3>
+            <p class="menu-item-desc">Matcha đặc sánh phía dưới, lớp kem sữa muối béo nhẹ phủ trên. Sự kết hợp hoàn hảo giữa vị đắng và vị béo mặn.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍵 Matcha</span>
+              <span class="meta-tag">M: 52.000đ / L: 59.000đ</span>
+              <span class="meta-tag">Mới</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">52.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="matcha-kem" data-product-name="Matcha Kem Sữa" data-product-price="52000" data-product-img="images/product_matcha_kemsua.png" id="order-matcha-cream-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-item" data-category="matcha nguyen-ban" id="matcha-iced">
+          <div class="menu-item-img">
+            <img src="images/product_matcha_daxay.png" alt="Matcha đá xay" loading="lazy" />
+          </div>
+          <div class="menu-item-body">
+            <h3 class="menu-item-name">Matcha Đá Xay</h3>
+            <p class="menu-item-desc">Matcha xay cùng đá và sữa, kết cấu như kem đá mịn, vị mát lạnh và thơm matcha. Hoàn hảo cho ngày nóng.</p>
+            <div class="menu-item-meta">
+              <span class="meta-tag">🍵 Matcha</span>
+              <span class="meta-tag">L: 55.000đ</span>
+            </div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">55.000 <small>đồng</small></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="matcha-iced" data-product-name="Matcha Đá Xay" data-product-price="55000" data-product-img="images/product_matcha_daxay.png" id="order-matcha-iced-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Order note -->
+      <div style="text-align:center;margin-top:var(--space-xl);padding:2rem;background:var(--color-cream);border-radius:var(--radius-lg);" data-animate>
+        <h3 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:0.75rem;">Muốn đặt món online?</h3>
+        <p style="color:var(--color-text-muted);margin-bottom:1.5rem;">Nhắn tin trực tiếp qua Zalo hoặc Messenger để đặt hàng và nhận tư vấn thực đơn</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="https://zalo.me/0363226006" target="_blank" class="btn btn-primary" id="menu-order-zalo">
+            💬 Đặt qua Zalo
+          </a>
+          <a href="tel:0363226006" class="btn btn-outline" id="menu-call-btn">
+            <i class="fa-solid fa-phone"></i> Gọi ngay: 0363 226 006
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:2rem 0;border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;gap:1rem;">
+        <span style="font-family:var(--font-heading);font-size:1.3rem;color:var(--color-white);">🍵 Trà Việt</span>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="index.html" style="color:rgba(255,255,255,0.6);font-size:0.88rem;">Trang chủ</a>
+          <a href="about.html" style="color:rgba(255,255,255,0.6);font-size:0.88rem;">Về chúng tôi</a>
+          <a href="store.html" style="color:rgba(255,255,255,0.6);font-size:0.88rem;">Cửa hàng</a>
+          <a href="contact.html" style="color:rgba(255,255,255,0.6);font-size:0.88rem;">Liên hệ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Trà Việt. Tất cả quyền được bảo lưu.</p>
+        <p class="footer-copy">📍 123 Đường Trà Xanh, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006 &nbsp;|&nbsp; ⏰ 7:00 – 22:00</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo" id="float-zalo">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+  </div>
+
+  <!-- Nhúng thư viện bổ trợ giỏ hàng tĩnh TMD -->
+<script src="js/topping-popup.js"></script>
+<script src="js/cart.js"></script>
+
+  <script src="js/main.js"></script>
+  <script src="js/menu-filter.js"></script>
+  <script src="js/menu-data.js"></script>
+</body>
+</html>

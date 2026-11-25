@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trà Việt – Một Khoảng Bình Yên Trong Từng Ly Trà</title>
+  <meta name="description"
+    content="Trà Việt – Trà nguyên vị, pha mới mỗi ngày từ nguyên liệu tuyển chọn. Không gian thư giãn, điều chỉnh khẩu vị theo ý bạn. Ghé thăm chúng tôi hôm nay!" />
+  <meta property="og:title" content="Trà Việt – Trà Nguyên Vị, Chạm Đúng Cảm Xúc" />
+  <meta property="og:description"
+    content="Những ly trà được pha từ nguyên liệu tuyển chọn, mang đến hương vị thanh nhẹ, tự nhiên." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Menu chính">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" id="nav-logo" aria-label="Trà Việt – Trang chủ">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z" />
+          </svg>
+        </div>
+        <span class="logo-text">Trà Việt</span>
+      </a>
+
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html" id="nav-home">Trang chủ</a></li>
+        <li><a href="menu.html" id="nav-menu">Menu</a></li>
+        <li><a href="about.html" id="nav-about">Về chúng tôi</a></li>
+        <li><a href="store.html" id="nav-store">Cửa hàng</a></li>
+        <li><a href="promotions.html" id="nav-promo">Khuyến mãi</a></li>
+        <li><a href="contact.html" id="nav-contact">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" aria-label="Đóng menu"
+          style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+
+      <div class="navbar-cta">
+        <a href="menu.html" class="btn btn-sm" id="nav-order-btn">Đặt món ngay</a>
+      </div>
+
+      <button class="navbar-toggle" id="navbar-toggle" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       SECTION 1 – HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="hero" aria-label="Giới thiệu">
+    <div class="hero-bg">
+      <img src="images/hero_bg.png" alt="Ly trà ô long kem sữa Trà Việt trong không gian quán ấm cúng"
+        loading="eager" />
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Trà Nguyên Vị – Pha Mới Mỗi Ngày
+      </div>
+
+      <h1>Một khoảng <em>bình yên</em><br>trong từng ly trà</h1>
+
+      <p class="hero-desc">
+        Những ly trà được pha từ nguyên liệu tuyển chọn, mang đến hương vị
+        thanh nhẹ, tự nhiên và phù hợp cho từng khoảnh khắc trong ngày.
+      </p>
+
+      <div class="hero-actions">
+        <a href="menu.html" class="btn btn-primary btn-lg" id="hero-menu-btn">
+          <i class="fa-solid fa-book-open"></i> Xem menu
+        </a>
+        <a href="#new-customer-offer" class="btn btn-secondary btn-lg" id="hero-offer-btn">
+          <i class="fa-solid fa-tag"></i> Nhận ưu đãi
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number">20+</div>
+          <div class="label">Loại trà đặc sắc</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="number">500+</div>
+          <div class="label">Khách hàng hài lòng</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="number">100%</div>
+          <div class="label">Nguyên liệu tự nhiên</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Khám phá</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 2 – FEATURED PRODUCTS
+  ══════════════════════════════════════ -->
+  <section class="featured-products" id="featured-products">
+    <div class="container">
+      <div class="products-header">
+        <div>
+          <span class="section-label">Nổi bật</span>
+          <h2 class="section-title">Những hương vị<br>được yêu thích nhất</h2>
+        </div>
+        <a href="menu.html" class="btn btn-outline" id="view-full-menu-btn">
+          Xem toàn bộ menu <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- Product 1 -->
+        <article class="product-card" data-animate>
+          <div class="product-img-wrap">
+            <img src="images/product_oolong.png" alt="Trà ô long kem sữa Trà Việt" loading="lazy" />
+            <span class="product-badge">Bán chạy</span>
+            <button class="product-wishlist" aria-label="Yêu thích">❤️</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trà Ô Long Kem Sữa</h3>
+            <p class="product-desc">Trà ô long đậm vị, lớp kem sữa béo nhẹ phía trên, cân bằng hoàn hảo giữa vị trà và
+              độ béo ngậy.</p>
+            <div class="product-footer">
+              <div class="product-price">45.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="oolong-cream"
+                data-product-name="Trà Ô Long Kem Sữa" data-product-price="45000"
+                data-product-img="images/product_oolong.png" id="order-oolong-btn"><i class="fa-solid fa-plus"></i> Thêm
+                vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card" data-animate style="transition-delay:0.1s">
+          <div class="product-img-wrap">
+            <img src="images/product_jasmine.png" alt="Trà lài đào Trà Việt" loading="lazy" />
+            <span class="product-badge" style="background:var(--color-green);color:white;">Mới</span>
+            <button class="product-wishlist" aria-label="Yêu thích">🤍</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trà Lài Đào</h3>
+            <p class="product-desc">Hương trà lài thanh nhẹ kết hợp cùng đào tươi, mang đến vị ngọt dịu và dễ uống.</p>
+            <div class="product-footer">
+              <div class="product-price">39.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="jasmine-peach"
+                data-product-name="Trà Lài Đào" data-product-price="39000" data-product-img="images/product_jasmine.png"
+                id="order-jasmine-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card" data-animate style="transition-delay:0.2s">
+          <div class="product-img-wrap">
+            <img src="images/product_lotus.png" alt="Trà sen vàng Trà Việt" loading="lazy" />
+            <button class="product-wishlist" aria-label="Yêu thích">🤍</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trà Sen Vàng</h3>
+            <p class="product-desc">Trà ủ cùng hoa sen tươi theo phương pháp truyền thống, hương thơm dịu dàng, tinh tế.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">42.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="sen-vang"
+                data-product-name="Trà Sen Vàng" data-product-price="42000" data-product-img="images/product_lotus.png"
+                id="order-lotus-btn"><i class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card" data-animate style="transition-delay:0.05s">
+          <div class="product-img-wrap">
+            <img src="images/product_honey_lemon.png" alt="Trà chanh mật ong Trà Việt" loading="lazy" />
+            <button class="product-wishlist" aria-label="Yêu thích">🤍</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trà Chanh Mật Ong</h3>
+            <p class="product-desc">Sự kết hợp tươi mát của trà xanh, chanh tươi và mật ong nguyên chất, giúp thanh
+              nhiệt hiệu quả.</p>
+            <div class="product-footer">
+              <div class="product-price">35.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="honey-lemon"
+                data-product-name="Trà Chanh Mật Ong" data-product-price="35000"
+                data-product-img="images/product_honey_lemon.png" id="order-honey-btn"><i class="fa-solid fa-plus"></i>
+                Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 5 -->
+        <article class="product-card" data-animate style="transition-delay:0.15s">
+          <div class="product-img-wrap">
+            <img src="images/product_tropical.png" alt="Trà trái cây nhiệt đới Trà Việt" loading="lazy" />
+            <span class="product-badge" style="background:#e87c2e;color:white;">Đặc biệt</span>
+            <button class="product-wishlist" aria-label="Yêu thích">🤍</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trà Trái Cây Nhiệt Đới</h3>
+            <p class="product-desc">Hòa quyện xoài, chanh dây, thanh long tươi với nền trà xanh mát lạnh – màu sắc đẹp,
+              vị chua ngọt hài hòa.</p>
+            <div class="product-footer">
+              <div class="product-price">45.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="tropical"
+                data-product-name="Trà Trái Cây Nhiệt Đới" data-product-price="45000"
+                data-product-img="images/product_tropical.png" id="order-tropical-btn"><i class="fa-solid fa-plus"></i>
+                Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 6 – Matcha (dùng hero img as fallback) -->
+        <article class="product-card" data-animate style="transition-delay:0.25s">
+          <div class="product-img-wrap" style="background:linear-gradient(135deg,#3d6b4a,#6ea87e);">
+            <img src="images/product_matcha_latte.png" alt="Matcha Sữa Tươi"
+              style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;min-height:240px;" />
+            <button class="product-wishlist" aria-label="Yêu thích">🤍</button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Matcha Sữa Tươi</h3>
+            <p class="product-desc">Matcha Nhật cao cấp hoà cùng sữa tươi nguyên kem, lớp bọt mịn phía trên, đắng nhẹ và
+              thơm đặc trưng.</p>
+            <div class="product-footer">
+              <div class="product-price">49.000 <span>đồng</span></div>
+              <button type="button" class="btn btn-primary btn-sm btn-add-cart" data-product-id="matcha"
+                data-product-name="Matcha Sữa Tươi" data-product-price="49000"
+                data-product-img="images/product_matcha_latte.png" id="order-matcha-btn"><i
+                  class="fa-solid fa-plus"></i> Thêm vào giỏ</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 3 – WHY US
+  ══════════════════════════════════════ -->
+  <section class="why-us" id="why-us">
+    <div class="container text-center">
+      <span class="section-label">Điểm khác biệt</span>
+      <h2 class="section-title">Vì sao khách hàng<br>chọn chúng tôi?</h2>
+      <p class="section-subtitle" style="margin:0 auto 0;">Chúng tôi không chỉ phục vụ một ly trà, mà còn mang đến một
+        trải nghiệm trọn vẹn.</p>
+
+      <div class="features-grid">
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">🌿</div>
+          <h3 class="feature-title">Trà được tuyển chọn</h3>
+          <p class="feature-desc">Nguyên liệu trà có nguồn gốc rõ ràng từ các vùng trà nổi tiếng, giữ được hương vị tự
+            nhiên thuần túy.</p>
+        </div>
+        <div class="feature-card" data-animate style="transition-delay:0.1s">
+          <div class="feature-icon">☀️</div>
+          <h3 class="feature-title">Pha mới mỗi ngày</h3>
+          <p class="feature-desc">Trà được ủ theo từng mẻ nhỏ trong ngày, hạn chế để lâu và bảo đảm chất lượng tươi ngon
+            nhất.</p>
+        </div>
+        <div class="feature-card" data-animate style="transition-delay:0.2s">
+          <div class="feature-icon">⚖️</div>
+          <h3 class="feature-title">Điều chỉnh khẩu vị</h3>
+          <p class="feature-desc">Khách có thể lựa chọn lượng đường, đá và topping theo sở thích cá nhân – đúng vị của
+            bạn.</p>
+        </div>
+        <div class="feature-card" data-animate style="transition-delay:0.3s">
+          <div class="feature-icon">🏡</div>
+          <h3 class="feature-title">Không gian thư giãn</h3>
+          <p class="feature-desc">Địa điểm lý tưởng để trò chuyện, học tập, làm việc hoặc dành một khoảng thời gian yên
+            tĩnh.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 4 – BRAND STORY
+  ══════════════════════════════════════ -->
+  <section class="brand-story" id="brand-story">
+    <div class="container">
+      <div class="brand-story-inner">
+        <div class="story-images" data-animate="fade-left">
+          <div class="story-img large">
+            <img src="images/product_lotus.png" alt="Trà sen – nguyên liệu truyền thống Việt Nam" loading="lazy" />
+          </div>
+          <div class="story-img medium">
+            <img src="images/product_oolong.png" alt="Quá trình pha trà tỉ mỉ" loading="lazy" />
+          </div>
+          <div class="story-img medium">
+            <img src="images/product_jasmine.png" alt="Không gian quán trà" loading="lazy" />
+          </div>
+          <div class="story-badge">
+            <div class="years">3+</div>
+            <div class="label">Năm kinh nghiệm</div>
+          </div>
+        </div>
+
+        <div class="story-content" data-animate="fade-right">
+          <span class="section-label">Câu chuyện của chúng tôi</span>
+          <h2 class="section-title">Câu chuyện bắt đầu<br>từ một <em>ly trà</em></h2>
+
+          <blockquote>
+            "Chúng tôi tin rằng một ly trà ngon không chỉ để giải khát, mà còn là cách để mọi người tạm dừng, thư giãn
+            và kết nối với nhau."
+          </blockquote>
+
+          <p style="color:var(--color-text-muted);line-height:1.85;margin-bottom:1.5rem;">
+            Từ mong muốn tạo ra một không gian gần gũi, chúng tôi lựa chọn từng loại trà, thử nghiệm từng công thức và
+            hoàn thiện mỗi sản phẩm trước khi phục vụ khách hàng. Mỗi ly trà là một lần chúng tôi gửi gắm sự tỉ mỉ và
+            tình yêu nghề.
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--color-text-muted);">
+              <span style="color:var(--color-green);font-size:1.2rem;">✓</span>
+              Nguyên liệu 100% tự nhiên, không chất bảo quản
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--color-text-muted);">
+              <span style="color:var(--color-green);font-size:1.2rem;">✓</span>
+              Công thức được nghiên cứu và hoàn thiện kỹ lưỡng
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--color-text-muted);">
+              <span style="color:var(--color-green);font-size:1.2rem;">✓</span>
+              Đội ngũ phục vụ thân thiện, tận tâm
+            </div>
+          </div>
+
+          <a href="about.html" class="btn btn-primary" id="story-learn-more-btn">
+            Tìm hiểu thêm về chúng tôi <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 5 – TEA COLLECTIONS
+  ══════════════════════════════════════ -->
+  <section class="tea-collections" id="tea-collections">
+    <div class="container text-center">
+      <span class="section-label">Bộ sưu tập</span>
+      <h2 class="section-title">Khám phá thế giới trà<br>theo phong cách của bạn</h2>
+      <p class="section-subtitle">Mỗi nhóm trà được chắt lọc để phù hợp với từng khẩu vị và cảm xúc khác nhau.</p>
+
+      <div class="collections-grid">
+
+        <div class="collection-card" data-animate>
+          <div class="collection-bg">
+            <img src="images/product_lotus.png" alt="Trà nguyên bản" loading="lazy" />
+          </div>
+          <div class="collection-overlay"></div>
+          <div class="collection-content">
+            <span class="collection-tag">Dòng trà</span>
+            <h3 class="collection-name">Trà Nguyên Bản</h3>
+            <p class="collection-desc">Dành cho khách thích vị trà tự nhiên, thanh và ít ngọt.</p>
+            <a href="menu.html?filter=nguyen-ban" class="collection-link" id="explore-original-btn">
+              Khám phá ngay <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="collection-card" data-animate style="transition-delay:0.1s">
+          <div class="collection-bg">
+            <img src="images/product_oolong.png" alt="Trà sữa" loading="lazy" />
+          </div>
+          <div class="collection-overlay"></div>
+          <div class="collection-content">
+            <span class="collection-tag">Dòng trà</span>
+            <h3 class="collection-name">Trà Sữa</h3>
+            <p class="collection-desc">Dành cho khách thích vị béo nhẹ, dễ uống và nhiều topping.</p>
+            <a href="menu.html?filter=tra-sua" class="collection-link" id="explore-milk-btn">
+              Khám phá ngay <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="collection-card" data-animate style="transition-delay:0.2s">
+          <div class="collection-bg">
+            <img src="images/product_tropical.png" alt="Trà trái cây" loading="lazy" />
+          </div>
+          <div class="collection-overlay"></div>
+          <div class="collection-content">
+            <span class="collection-tag">Dòng trà</span>
+            <h3 class="collection-name">Trà Trái Cây</h3>
+            <p class="collection-desc">Dành cho khách thích sự tươi mát, chua ngọt và nhiều màu sắc.</p>
+            <a href="menu.html?filter=trai-cay" class="collection-link" id="explore-fruit-btn">
+              Khám phá ngay <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="collection-card" data-animate style="transition-delay:0.3s">
+          <div class="collection-bg">
+            <img src="images/product_matcha_latte.png" alt="Matcha" loading="lazy" />
+          </div>
+          <div class="collection-overlay"></div>
+          <div class="collection-content">
+            <span class="collection-tag">Đặc biệt</span>
+            <h3 class="collection-name">Matcha & Đặc Biệt</h3>
+            <p class="collection-desc">Những món có công thức riêng, mang tính nhận diện thương hiệu.</p>
+            <a href="menu.html?filter=matcha" class="collection-link" id="explore-matcha-btn">
+              Khám phá ngay <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 6 – SPACE GALLERY
+  ══════════════════════════════════════ -->
+  <section class="space-gallery" id="space-gallery">
+    <div class="container text-center">
+      <span class="section-label">Không gian</span>
+      <h2 class="section-title">Không chỉ là<br>nơi uống trà</h2>
+      <p class="section-subtitle">Không gian được thiết kế để bạn có thể gặp gỡ bạn bè, học tập, làm việc hoặc dành một
+        khoảng thời gian yên tĩnh cho bản thân.</p>
+
+      <div class="gallery-grid" style="margin-top:var(--space-xl)">
+        <div class="gallery-item" data-animate>
+          <img src="images/hero_bg.png" alt="Không gian chính quán Trà Việt" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+        <div class="gallery-item" data-animate style="transition-delay:0.1s">
+          <img src="images/product_oolong.png" alt="Quầy pha chế Trà Việt" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+        <div class="gallery-item" data-animate style="transition-delay:0.15s">
+          <img src="images/product_lotus.png" alt="Khu vực ngồi thoải mái" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+        <div class="gallery-item" data-animate style="transition-delay:0.2s">
+          <img src="images/product_jasmine.png" alt="Góc chụp ảnh check-in" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+        <div class="gallery-item" data-animate style="transition-delay:0.25s">
+          <img src="images/product_honey_lemon.png" alt="Không gian xanh mát" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+        <div class="gallery-item" data-animate style="transition-delay:0.3s">
+          <img src="images/product_tropical.png" alt="Ly trà trong không gian quán" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-icon">🔍</span></div>
+        </div>
+      </div>
+
+      <div class="gallery-cta">
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-outline" id="maps-btn"
+          style="border-color:var(--color-green);color:var(--color-green);">
+          <i class="fa-solid fa-map-location-dot"></i> Xem địa chỉ trên Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 7 – NEW CUSTOMER OFFER
+  ══════════════════════════════════════ -->
+  <section class="new-customer-offer" id="new-customer-offer">
+    <div class="offer-bg-pattern"></div>
+    <div class="container">
+      <div class="offer-inner">
+        <div class="offer-content" data-animate="fade-left">
+          <span class="section-label">Dành cho bạn</span>
+          <h2 class="section-title" style="color:white;">Lần đầu ghé quán,<br>nhận ngay ưu đãi</h2>
+          <div class="offer-highlight">GIẢM 20%</div>
+          <p class="offer-desc">
+            Đăng ký nhận mã giảm giá ngay hôm nay để áp dụng cho đơn hàng đầu tiên của bạn. Chỉ cần điền thông tin, mã
+            sẽ gửi về ngay lập tức!
+          </p>
+          <div class="offer-perks">
+            <div class="offer-perk">
+              <span class="perk-check">✓</span>
+              Giảm 20% cho đơn đầu tiên
+            </div>
+            <div class="offer-perk">
+              <span class="perk-check">✓</span>
+              Nhận thông tin ưu đãi hàng tuần
+            </div>
+            <div class="offer-perk">
+              <span class="perk-check">✓</span>
+              Tham gia chương trình thành viên
+            </div>
+            <div class="offer-perk">
+              <span class="perk-check">✓</span>
+              Miễn phí nâng size trong tháng sinh nhật
+            </div>
+          </div>
+        </div>
+
+        <div class="offer-form-card" data-animate="fade-right">
+          <h3>Nhận mã ngay</h3>
+          <p>Điền thông tin để nhận mã giảm giá 20% cho lần đầu</p>
+          <form id="offer-form" onsubmit="handleOfferForm(event)">
+            <div class="form-group">
+              <label for="offer-name">Họ và tên</label>
+              <input type="text" id="offer-name" name="name" placeholder="Nguyễn Văn A" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="offer-phone">Số điện thoại</label>
+              <input type="tel" id="offer-phone" name="phone" placeholder="0363 226 006" required autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="offer-email">Email hoặc Zalo</label>
+              <input type="email" id="offer-email" name="email" placeholder="email@example.com" autocomplete="email" />
+            </div>
+            <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;" id="offer-submit-btn">
+              <i class="fa-solid fa-gift"></i> Nhận mã giảm giá
+            </button>
+          </form>
+          <p class="offer-form-note">🔒 Thông tin của bạn được bảo mật tuyệt đối. Không spam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 8 – TESTIMONIALS
+  ══════════════════════════════════════ -->
+  <section class="testimonials" id="testimonials">
+    <div class="container text-center">
+      <span class="section-label">Đánh giá</span>
+      <h2 class="section-title">Khách hàng nói gì<br>về chúng tôi?</h2>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" data-animate>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Trà thơm, không quá ngọt, không gian yên tĩnh và nhân viên rất dễ thương. Mình hay
+            ghé vào buổi chiều để làm việc, cảm giác rất thư giãn.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👩</div>
+            <div>
+              <div class="author-name">Minh Thư</div>
+              <div class="author-label">Học sinh đại học</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate style="transition-delay:0.1s">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Mình thích nhất trà ô long kem sữa, vị trà rõ và không bị béo quá. Uống xong vẫn
+            cảm nhận được hương trà thơm lâu trong miệng.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👨</div>
+            <div>
+              <div class="author-name">Quốc Bảo</div>
+              <div class="author-label">Nhân viên văn phòng</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate style="transition-delay:0.2s">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Trà lài đào cực kỳ thơm và tươi mát. Giá cả hợp lý, không gian sạch sẽ, mình đã
+            giới thiệu cho cả nhóm bạn. Ai cũng mê!</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👩</div>
+            <div>
+              <div class="author-name">Hương Giang</div>
+              <div class="author-label">Blogger ẩm thực</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 9 – SOCIAL FEED
+  ══════════════════════════════════════ -->
+  <section class="social-feed" id="social-feed">
+    <div class="container text-center">
+      <span class="section-label">Mạng xã hội</span>
+      <h2 class="section-title">Mỗi ly trà là<br>một khoảnh khắc</h2>
+      <p class="section-subtitle">Theo dõi chúng tôi để cập nhật thực đơn mới, ưu đãi và những khoảnh khắc đẹp mỗi ngày.
+      </p>
+
+      <div class="social-grid" style="margin-top:var(--space-xl);">
+        <div class="social-item" data-animate>
+          <img src="images/product_oolong.png" alt="Trà ô long kem sữa - Instagram" loading="lazy" />
+          <div class="social-item-overlay"><span
+              style="color:white;font-size:2rem;opacity:0;transition:opacity 0.3s;">📸</span></div>
+        </div>
+        <div class="social-item" data-animate style="transition-delay:0.05s">
+          <img src="images/product_jasmine.png" alt="Trà lài đào - Instagram" loading="lazy" />
+          <div class="social-item-overlay"></div>
+        </div>
+        <div class="social-item" data-animate style="transition-delay:0.1s">
+          <img src="images/hero_bg.png" alt="Không gian quán - Instagram" loading="lazy" />
+          <div class="social-item-overlay"></div>
+        </div>
+        <div class="social-item" data-animate style="transition-delay:0.15s">
+          <img src="images/product_tropical.png" alt="Trà trái cây - Instagram" loading="lazy" />
+          <div class="social-item-overlay"></div>
+        </div>
+        <div class="social-item" data-animate style="transition-delay:0.2s">
+          <img src="images/product_lotus.png" alt="Trà sen vàng - Instagram" loading="lazy" />
+          <div class="social-item-overlay"></div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn facebook" id="facebook-btn">
+          <i class="fab fa-facebook-f"></i> Theo dõi Facebook
+        </a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-btn tiktok" id="tiktok-btn">
+          <i class="fab fa-tiktok"></i> Xem TikTok
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn instagram" id="instagram-btn">
+          <i class="fab fa-instagram"></i> Xem Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SECTION 10 – FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <div class="logo-text">
+            <span
+              style="width:32px;height:32px;background:var(--color-green);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;">🍵</span>
+            Trà Việt
+          </div>
+          <p class="footer-desc">Trà nguyên vị – Chạm đúng cảm xúc. Từng ly trà là một trải nghiệm được chúng tôi trân
+            trọng và gửi gắm tâm huyết.</p>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1rem;font-style:italic;">"Trà ngon cho
+            ngày dịu lại"</p>
+          <div class="footer-socials">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-link"
+              id="footer-facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link"
+              id="footer-instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="footer-social-link" id="footer-tiktok"
+              aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://zalo.me/0363226006" target="_blank" rel="noopener" class="footer-social-link"
+              id="footer-zalo" aria-label="Zalo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 16.708c-.234.39-.688.556-1.11.39l-3.12-1.17-1.56 1.17c-.312.234-.78.195-1.05-.078l-2.34-2.34-2.34 1.95c-.39.312-.936.234-1.248-.156-.312-.39-.234-.936.156-1.248l2.73-2.262c.312-.234.78-.195 1.05.078l2.34 2.34 1.482-1.092c.234-.156.546-.195.82-.078l3.9 1.482c.468.156.7.702.468 1.17h-.078z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Trang chính</h4>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="menu.html">Thực đơn</a></li>
+            <li><a href="about.html">Về chúng tôi</a></li>
+            <li><a href="store.html">Cửa hàng</a></li>
+            <li><a href="promotions.html">Khuyến mãi</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Chính sách</h4>
+          <ul>
+            <li><a href="#">Chính sách giao hàng</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Bảo mật thông tin</a></li>
+            <li><a href="#">Điều khoản sử dụng</a></li>
+            <li><a href="#">Hợp tác kinh doanh</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Liên hệ & Giờ mở cửa</h4>
+          <div class="footer-info-item">
+            <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="footer-info-text">123 Đường Trà Xanh, Phường Bình Yên, TP. Hồ Chí Minh</span>
+          </div>
+          <div class="footer-info-item">
+            <span class="footer-info-icon"><i class="fa-solid fa-phone"></i></span>
+            <span class="footer-info-text"><a href="tel:0363226006" style="color:inherit;">0363 226 006</a></span>
+          </div>
+          <div class="footer-info-item">
+            <span class="footer-info-icon"><i class="fa-solid fa-clock"></i></span>
+            <div>
+              <div class="footer-hours">
+                <span class="day">Thứ 2 – Thứ 6:</span><span class="time">7:00 – 22:00</span>
+                <span class="day">Thứ 7 – CN:</span><span class="time">7:00 – 23:00</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-outline btn-sm"
+            style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);margin-top:0.5rem;"
+            id="footer-maps-btn">
+            <i class="fa-solid fa-map-location-dot"></i> Xem bản đồ
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Trà Việt. Tất cả quyền được bảo lưu.</p>
+        <div class="footer-links">
+          <a href="#">Chính sách bảo mật</a>
+          <a href="#">Điều khoản</a>
+          <a href="contact.html">Liên hệ hợp tác</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       FLOATING CONTACT BUTTONS
+  ══════════════════════════════════════ -->
+  <div class="float-contact" aria-label="Liên hệ nhanh">
+    <a href="https://zalo.me/0363226006" target="_blank" rel="noopener" class="float-btn zalo" id="float-zalo-btn">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+    <a href="https://m.me/traviet" target="_blank" rel="noopener" class="float-btn messenger" id="float-messenger-btn">
+      <span class="icon">📩</span> Messenger
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

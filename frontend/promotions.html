@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khuyến Mãi – Trà Việt</title>
+  <meta name="description" content="Các chương trình khuyến mãi hấp dẫn tại Trà Việt – Khai trương, ưu đãi sinh nhật, mua 2 tặng 1, chương trình thành viên và nhiều hơn nữa." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .promo-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; margin-top:var(--space-xl); }
+    .promo-card {
+      background:var(--color-white);
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      border:1px solid var(--color-border);
+      transition:all var(--transition-base);
+      position:relative;
+    }
+    .promo-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-xl); }
+    .promo-card.featured {
+      grid-column:span 2;
+      background:linear-gradient(135deg,var(--color-green-dark),var(--color-green));
+      border-color:transparent;
+      color:white;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+    }
+    .promo-header {
+      padding:2rem 2rem 1.5rem;
+      background:linear-gradient(135deg,var(--color-green),var(--color-green-light));
+      color:white;
+    }
+    .promo-card.featured .promo-header { background:transparent; }
+    .promo-tag {
+      display:inline-block;
+      background:rgba(255,255,255,0.2);
+      border:1px solid rgba(255,255,255,0.3);
+      color:white;
+      font-size:0.72rem;
+      font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      padding:0.25rem 0.8rem;
+      border-radius:var(--radius-full);
+      margin-bottom:0.75rem;
+    }
+    .promo-title { font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem; }
+    .promo-discount {
+      font-family:var(--font-heading);
+      font-size:3rem;
+      font-weight:700;
+      color:var(--color-gold-light);
+      line-height:1;
+    }
+    .promo-body { padding:1.75rem 2rem 2rem; }
+    .promo-card.featured .promo-body { color:rgba(255,255,255,0.9); }
+    .promo-desc { font-size:0.92rem; color:var(--color-text-muted); line-height:1.75; margin-bottom:1.25rem; }
+    .promo-card.featured .promo-desc { color:rgba(255,255,255,0.8); }
+    .promo-conditions { font-size:0.78rem; color:var(--color-text-muted); margin-top:0.75rem; }
+    .promo-card.featured .promo-conditions { color:rgba(255,255,255,0.55); }
+    .promo-img-side {
+      display:flex; align-items:center; justify-content:center;
+      padding:2rem; font-size:8rem;
+    }
+
+    .promo-countdown {
+      display:flex; gap:1rem; margin:1rem 0;
+    }
+    .countdown-item { text-align:center; }
+    .countdown-number {
+      font-family:var(--font-heading);
+      font-size:2rem; font-weight:700;
+      color:var(--color-gold-light);
+      background:rgba(255,255,255,0.1);
+      border-radius:var(--radius-md);
+      width:56px; height:56px;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:0.25rem;
+    }
+    .countdown-label { font-size:0.7rem; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:0.08em; }
+
+    .member-tiers { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:var(--space-xl); }
+    .tier-card {
+      border-radius:var(--radius-xl); padding:2.5rem 2rem; text-align:center;
+      border:2px solid var(--color-border); transition:all var(--transition-base);
+    }
+    .tier-card.bronze { border-color:#cd7f32; background:linear-gradient(135deg,#fff8f0,#fdf3e8); }
+    .tier-card.silver { border-color:#a8a8a8; background:linear-gradient(135deg,#f8f8f8,#efefef); }
+    .tier-card.gold   { border-color:#c8a96e; background:linear-gradient(135deg,#fffbf0,#fff7e3); }
+    .tier-icon { font-size:3rem; margin-bottom:1rem; }
+    .tier-name { font-family:var(--font-heading); font-size:1.4rem; margin-bottom:0.5rem; }
+    .tier-requirement { font-size:0.82rem; color:var(--color-text-muted); margin-bottom:1.5rem; }
+    .tier-benefits { text-align:left; }
+    .tier-benefit { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; margin-bottom:0.5rem; color:var(--color-text-muted); }
+    .tier-benefit::before { content:'✓'; color:var(--color-green); font-weight:700; flex-shrink:0; }
+
+    @media(max-width:900px) {
+      .promo-grid { grid-template-columns:1fr; }
+      .promo-card.featured { grid-column:span 1; grid-template-columns:1fr; }
+      .promo-img-side { display:none; }
+      .member-tiers { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar" role="navigation">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V17h8v-1.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 2-1 3.8-2.5 4.8l-.5.4V15H10v-1.7l-.5-.4C8 11.8 7 10 7 9c0-2.8 2.2-5 5-5zm-3 14h6v1H9v-1zm1 2h4v1h-4v-1z"/></svg></div>
+        <span class="logo-text" style="color:var(--color-green-dark);">Trà Việt</span>
+      </a>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">Về chúng tôi</a></li>
+        <li><a href="store.html">Cửa hàng</a></li>
+        <li><a href="promotions.html" style="color:var(--color-green);font-weight:700;">Khuyến mãi</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+        <button class="close-nav" id="close-nav" style="display:none;position:absolute;top:2rem;right:2rem;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">✕</button>
+      </ul>
+      <div class="navbar-cta"><a href="menu.html" class="btn btn-sm">Xem menu</a></div>
+      <button class="navbar-toggle" id="navbar-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container page-header-content">
+      <span class="section-label" style="color:var(--color-gold-light);">Ưu đãi</span>
+      <h1>Khuyến mãi & Ưu đãi</h1>
+      <p>Những chương trình đặc biệt dành riêng cho bạn – đừng bỏ lỡ!</p>
+    </div>
+  </div>
+
+  <section style="padding:var(--space-3xl) 0;background:var(--color-cream);">
+    <div class="container">
+      <div class="promo-grid">
+
+        <!-- Featured - Grand Opening -->
+        <div class="promo-card featured" data-animate>
+          <div>
+            <div class="promo-header">
+              <span class="promo-tag">🎊 Khai trương</span>
+              <h2 class="promo-title">Tuần Khai Trương<br>Siêu Ưu Đãi!</h2>
+              <div class="promo-discount">GIẢM 20%</div>
+            </div>
+            <div class="promo-body">
+              <p class="promo-desc">Nhân dịp khai trương, toàn bộ menu được giảm 20% trong suốt tuần đầu tiên. Áp dụng cho tất cả sản phẩm, không giới hạn số lần mua.</p>
+              <div class="promo-countdown" id="countdown">
+                <div class="countdown-item"><div class="countdown-number" id="cd-days">05</div><div class="countdown-label">Ngày</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="cd-hours">12</div><div class="countdown-label">Giờ</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="cd-mins">30</div><div class="countdown-label">Phút</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="cd-secs">00</div><div class="countdown-label">Giây</div></div>
+              </div>
+              <a href="landing-grand-opening.html" class="btn btn-gold" id="promo-opening-btn">Nhận mã ngay</a>
+              <p class="promo-conditions">* Không áp dụng cùng khuyến mãi khác. Áp dụng đến hết tuần khai trương.</p>
+            </div>
+          </div>
+          <div class="promo-img-side">🎉</div>
+        </div>
+
+        <!-- Combo mua 2 tặng 1 -->
+        <div class="promo-card" data-animate>
+          <div class="promo-header">
+            <span class="promo-tag">🔥 Đang diễn ra</span>
+            <h2 class="promo-title">Mua 2 Tặng 1</h2>
+            <div class="promo-discount" style="color:var(--color-gold-light);">+1 FREE</div>
+          </div>
+          <div class="promo-body">
+            <p class="promo-desc">Mua 2 ly trà bất kỳ, nhận ngay 1 ly có giá thấp nhất miễn phí. Hoàn hảo khi đi cùng bạn bè!</p>
+            <a href="contact.html" class="btn btn-primary" id="promo-2-1-btn">Áp dụng ngay</a>
+            <p class="promo-conditions">* Áp dụng vào Thứ 3 & Thứ 5 hàng tuần. Tại quán.</p>
+          </div>
+        </div>
+
+        <!-- Sinh nhật -->
+        <div class="promo-card" data-animate style="transition-delay:0.1s">
+          <div class="promo-header" style="background:linear-gradient(135deg,#c8a96e,#dfc08e);">
+            <span class="promo-tag">🎂 Sinh nhật</span>
+            <h2 class="promo-title">Quà Tặng Sinh Nhật</h2>
+            <div class="promo-discount" style="color:white;">FREE SIZE L</div>
+          </div>
+          <div class="promo-body">
+            <p class="promo-desc">Vào ngày sinh nhật của bạn, nhận miễn phí nâng size L cho bất kỳ món nào. Xuất trình CMND hoặc CCCD để xác nhận.</p>
+            <a href="#" onclick="showToast('Đăng ký sinh nhật qua Zalo: 0363 226 006 🎂')" class="btn btn-primary" id="promo-birthday-btn">Đăng ký ngay</a>
+            <p class="promo-conditions">* Chỉ áp dụng đúng ngày sinh nhật. Cần đăng ký trước 3 ngày.</p>
+          </div>
+        </div>
+
+        <!-- Check-in -->
+        <div class="promo-card" data-animate style="transition-delay:0.15s">
+          <div class="promo-header" style="background:linear-gradient(135deg,#e87c2e,#f0a050);">
+            <span class="promo-tag">📸 Check-in</span>
+            <h2 class="promo-title">Check-in Nhận Quà</h2>
+            <div class="promo-discount" style="color:white;">TOPPING FREE</div>
+          </div>
+          <div class="promo-body">
+            <p class="promo-desc">Check-in tại quán và tag @TràViệt trên Facebook hoặc Instagram, nhận ngay 1 topping miễn phí cho ly trà của bạn.</p>
+            <a href="https://facebook.com" target="_blank" class="btn btn-primary" id="promo-checkin-btn">Theo dõi ngay</a>
+            <p class="promo-conditions">* Cần show bài đăng cho nhân viên. Áp dụng mỗi khách 1 lần/ngày.</p>
+          </div>
+        </div>
+
+        <!-- Giới thiệu bạn bè -->
+        <div class="promo-card" data-animate style="transition-delay:0.2s">
+          <div class="promo-header" style="background:linear-gradient(135deg,#4a7c59,#6ea87e);">
+            <span class="promo-tag">👥 Referral</span>
+            <h2 class="promo-title">Giới Thiệu Bạn Bè</h2>
+            <div class="promo-discount" style="color:var(--color-gold-light);">15% OFF</div>
+          </div>
+          <div class="promo-body">
+            <p class="promo-desc">Giới thiệu bạn bè đến quán lần đầu. Cả bạn và người được giới thiệu đều nhận giảm 15% cho đơn tiếp theo.</p>
+            <a href="contact.html" class="btn btn-primary" id="promo-refer-btn">Lấy mã giới thiệu</a>
+            <p class="promo-conditions">* Mỗi mã chỉ dùng 1 lần. Không giới hạn số lần giới thiệu.</p>
+          </div>
+        </div>
+
+        <!-- Thứ 2 vui vẻ -->
+        <div class="promo-card" data-animate style="transition-delay:0.25s">
+          <div class="promo-header" style="background:linear-gradient(135deg,#2e5c3e,#4a7c59);">
+            <span class="promo-tag">📅 Hàng tuần</span>
+            <h2 class="promo-title">Thứ 2 Vui Vẻ</h2>
+            <div class="promo-discount" style="color:var(--color-gold-light);">GIẢM 10%</div>
+          </div>
+          <div class="promo-body">
+            <p class="promo-desc">Mỗi thứ Hai, toàn bộ thực đơn giảm 10% cho mọi khách hàng. Bắt đầu tuần mới bằng một ly trà thơm với giá ưu đãi!</p>
+            <a href="menu.html" class="btn btn-primary" id="promo-monday-btn">Xem thực đơn</a>
+            <p class="promo-conditions">* Chỉ áp dụng vào Thứ Hai. Không áp dụng cùng KM khác.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Member tiers -->
+  <section style="padding:var(--space-3xl) 0;background:var(--color-white);">
+    <div class="container text-center">
+      <span class="section-label">Thành viên</span>
+      <h2 class="section-title">Chương trình<br>khách hàng thân thiết</h2>
+      <p class="section-subtitle" style="margin:0 auto var(--space-sm);">Tích điểm mỗi lần mua, nâng hạng và nhận thêm nhiều đặc quyền!</p>
+
+      <div class="member-tiers">
+        <div class="tier-card bronze" data-animate>
+          <div class="tier-icon">🥉</div>
+          <h3 class="tier-name">Hạng Đồng</h3>
+          <p class="tier-requirement">Từ 0 điểm</p>
+          <div class="tier-benefits">
+            <div class="tier-benefit">Tích 1 điểm mỗi 10.000đ</div>
+            <div class="tier-benefit">Giảm giá sinh nhật</div>
+            <div class="tier-benefit">Thông báo ưu đãi sớm</div>
+          </div>
+        </div>
+        <div class="tier-card silver" data-animate style="transition-delay:0.1s">
+          <div class="tier-icon">🥈</div>
+          <h3 class="tier-name">Hạng Bạc</h3>
+          <p class="tier-requirement">Từ 500 điểm</p>
+          <div class="tier-benefits">
+            <div class="tier-benefit">Tích 1.2 điểm mỗi 10.000đ</div>
+            <div class="tier-benefit">Giảm 5% mỗi đơn hàng</div>
+            <div class="tier-benefit">Miễn phí nâng size sinh nhật</div>
+            <div class="tier-benefit">1 topping miễn phí/tháng</div>
+          </div>
+        </div>
+        <div class="tier-card gold" data-animate style="transition-delay:0.2s">
+          <div class="tier-icon">🥇</div>
+          <h3 class="tier-name">Hạng Vàng</h3>
+          <p class="tier-requirement">Từ 2.000 điểm</p>
+          <div class="tier-benefits">
+            <div class="tier-benefit">Tích 1.5 điểm mỗi 10.000đ</div>
+            <div class="tier-benefit">Giảm 10% mỗi đơn hàng</div>
+            <div class="tier-benefit">1 ly trà miễn phí/tháng</div>
+            <div class="tier-benefit">Ưu tiên đặt chỗ ngồi</div>
+            <div class="tier-benefit">Quà đặc biệt sinh nhật</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:var(--space-lg);">
+        <a href="contact.html" class="btn btn-primary btn-lg" id="join-member-btn">
+          <i class="fa-solid fa-star"></i> Đăng ký thành viên miễn phí
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Trà Việt. Tất cả quyền được bảo lưu.</p>
+        <p class="footer-copy">📍 123 Đường Trà Xanh, TP. HCM &nbsp;|&nbsp; 📞 0363 226 006</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="float-contact">
+    <a href="https://zalo.me/0363226006" target="_blank" class="float-btn zalo">
+      <span class="icon">💬</span> Nhắn Zalo
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Countdown Timer
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 5);
+    endDate.setHours(23, 59, 59);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = endDate - now;
+      if (diff <= 0) return;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

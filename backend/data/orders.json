@@ -1,0 +1,51 @@
+[
+  {
+    "id": "TV-849201",
+    "customer": {
+      "fullname": "Nguyễn Văn An",
+      "phone": "0987654321",
+      "address": "123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM",
+      "deliveryTime": "Giao ngay",
+      "branch": "Trà Việt - Chi Nhánh 1",
+      "notes": "Cho ít ngọt, để đá riêng giúp em"
+    },
+    "items": [
+      {
+        "name": "Trà Ô Long Kem Sữa",
+        "size": "L",
+        "sugar": "70%",
+        "ice": "50%",
+        "quantity": 2,
+        "unitPrice": 59000,
+        "toppings": [
+          {
+            "name": "Trân châu đen",
+            "price": 7000
+          }
+        ]
+      },
+      {
+        "name": "Trà Lài Đào",
+        "size": "M",
+        "sugar": "100%",
+        "ice": "100%",
+        "quantity": 1,
+        "unitPrice": 46000,
+        "toppings": [
+          {
+            "name": "Thạch nha đam",
+            "price": 7000
+          }
+        ]
+      }
+    ],
+    "subtotal": 164000,
+    "shippingFee": 0,
+    "discount": 20000,
+    "grandTotal": 144000,
+    "paymentMethod": "vietqr",
+    "paymentStatus": "paid",
+    "orderStatus": "completed",
+    "createdAt": "2026-09-23T19:40:00.000Z"
+  }
+]
