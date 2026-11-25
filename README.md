@@ -129,3 +129,5 @@ TMD/
 
 ## 📄 Giấy Phép
 Dự án được bảo lưu mọi quyền bởi **Trà Việt Traditional Tea © 2026**.
+
+Built by ItsDucc__
